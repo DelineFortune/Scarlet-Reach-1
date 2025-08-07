@@ -222,11 +222,13 @@
 
 /datum/sex_controller/proc/update_erect_state()
 	var/obj/item/organ/penis/penis = user.getorganslot(ORGAN_SLOT_PENIS)
+
 	if(user.mind)
 		var/datum/antagonist/werewolf/W = user.mind.has_antag_datum(/datum/antagonist/werewolf/)
 		if(W && W.transformed == TRUE)
 			user.regenerate_icons()
-	if(penis)
+
+	if(penis && hascall(penis, "update_erect_state"))
 		penis.update_erect_state()
 
 /datum/sex_controller/proc/adjust_arousal(amount)
