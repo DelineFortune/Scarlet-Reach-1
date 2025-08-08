@@ -4,6 +4,7 @@
 	visible_organ = TRUE
 	zone = BODY_ZONE_PRECISE_GROIN
 	slot = ORGAN_SLOT_PENIS
+	maxHealth = STANDARD_ORGAN_THRESHOLD
 	organ_dna_type = /datum/organ_dna/penis
 	accessory_type = /datum/sprite_accessory/penis/human
 	var/sheath_type = SHEATH_TYPE_NONE
@@ -95,6 +96,7 @@
 	zone = BODY_ZONE_PRECISE_GROIN
 	slot = ORGAN_SLOT_VAGINA
 	accessory_type = /datum/sprite_accessory/vagina/human
+	maxHealth = STANDARD_ORGAN_THRESHOLD
 	var/pregnant = FALSE
 	var/fertility = TRUE
 	var/impregnation_probability = IMPREG_PROB_DEFAULT
@@ -117,6 +119,7 @@
 	visible_organ = TRUE
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_BREASTS
+	maxHealth = STANDARD_ORGAN_THRESHOLD
 	organ_dna_type = /datum/organ_dna/breasts
 	accessory_type = /datum/sprite_accessory/breasts/pair
 	var/breast_size = DEFAULT_BREASTS_SIZE
@@ -134,6 +137,7 @@
 	visible_organ = TRUE
 	zone = BODY_ZONE_PRECISE_GROIN
 	slot = ORGAN_SLOT_TESTICLES
+	maxHealth = STANDARD_ORGAN_THRESHOLD
 	organ_dna_type = /datum/organ_dna/testicles
 	accessory_type = /datum/sprite_accessory/testicles/pair
 	var/ball_size = DEFAULT_TESTICLES_SIZE
