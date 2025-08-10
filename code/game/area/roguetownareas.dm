@@ -30,15 +30,6 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	if((src.town_area == TRUE) && HAS_TRAIT(guy, TRAIT_GUARDSMAN) && !guy.has_status_effect(/datum/status_effect/buff/guardbuffone)) //man at arms
 		guy.apply_status_effect(/datum/status_effect/buff/guardbuffone)
 
-
-/area/rogue/Entered(mob/living/carbon/human/guy)
-	. = ..()
-
-	if (!L.client)
-		return
-	if (src.town_area && !L.has_status_effect(/datum/status_effect/buff/citybuff))
-		L.apply_status_effect(/datum/status_effect/buff/citybuff)
-
 /area/rogue/Entered(mob/living/carbon/human/guy)
 
 	. = ..()
