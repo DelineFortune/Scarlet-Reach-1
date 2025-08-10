@@ -31,7 +31,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 		guy.apply_status_effect(/datum/status_effect/buff/guardbuffone)
 
 
-/area/rogue/Entered(atom/movable/A, atom/oldloc)
+/area/rogue/Entered(mob/living/carbon/human/guy)
 	. = ..()
 
 	if (!isliving(A))
