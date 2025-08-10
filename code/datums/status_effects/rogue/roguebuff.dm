@@ -404,24 +404,24 @@
 /datum/status_effect/buff/wardenbuff
 	id = "wardenbuff"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/wardenbuff
-	effectedstats = list("speed" = 1, "perception" = 3) 
+	effectedstats = list("speed" = 1, "perception" = 3)
 
 
 /datum/status_effect/buff/wardenbuff
 	id = "wardenbuff"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/wardenbuff
-	effectedstats = list("speed" = 1, "perception" = 3) 		
+	effectedstats = list("speed" = 1, "perception" = 3)
 
 
 /datum/status_effect/buff/wardenbuff
 	id = "wardenbuff"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/wardenbuff
-	effectedstats = list("speed" = 1, "perception" = 3) 
+	effectedstats = list("speed" = 1, "perception" = 3)
 
 /datum/status_effect/buff/barkeepbuff
 	id = "barkeepbuff"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/barkeepbuff
-	effectedstats = list("constitution" = 1,"endurance" = 1, "speed" = 1, "strength" = 3) 
+	effectedstats = list("constitution" = 1,"endurance" = 1, "speed" = 1, "strength" = 3)
 
 /datum/status_effect/buff/barkeepbuff/process()
 
@@ -433,7 +433,7 @@
 /datum/status_effect/buff/guardbuffone
 	id = "guardbuffone"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/guardbuffone
-	effectedstats = list("constitution" = 1,"endurance" = 1, "speed" = 1, "perception" = 2) 
+	effectedstats = list("constitution" = 1,"endurance" = 1, "speed" = 1, "perception" = 2)
 
 /datum/status_effect/buff/dungeoneerbuff
 	id = "dungeoneerbuff"
@@ -482,7 +482,7 @@
 
 	.=..()
 	var/area/rogue/our_area = get_area(owner)
-	if(!(our_area.psydonarea))
+	if(!(our_area.psydon_area))
 		owner.remove_status_effect(/datum/status_effect/buff/psydonbuff)
 
 
@@ -498,8 +498,8 @@
 
 	.=..()
 	var/area/rogue/our_area = get_area(owner)
-	if(!(our_area.city_area))
-		owner.remove_status_effect(/datum/status_effect/buff/citybuff)				
+	if(!(our_area.town_area))
+		owner.remove_status_effect(/datum/status_effect/buff/citybuff)
 
 /atom/movable/screen/alert/status_effect/buff/healing
 	name = "Healing Miracle"
@@ -609,7 +609,7 @@
 		owner.adjustOxyLoss(-healing_on_tick, 0)
 		owner.adjustToxLoss(-healing_on_tick, 0)
 		owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, -healing_on_tick)
-		owner.adjustCloneLoss(-healing_on_tick, 0)		
+		owner.adjustCloneLoss(-healing_on_tick, 0)
 
 /datum/status_effect/buff/rockmuncher
 	id = "rockmuncher"
@@ -1065,7 +1065,7 @@
 	name = "Ready to Clash"
 	desc = span_notice("I am on guard, and ready to clash. If I am hit, I will successfully defend. Attacking will make me lose my focus.")
 	icon_state = "clash"
-  
+
 #define BLOODRAGE_FILTER "bloodrage"
 
 /atom/movable/screen/alert/status_effect/buff/graggar_bloodrage
@@ -1110,7 +1110,7 @@
 /datum/status_effect/buff/psydonic_endurance
 	id = "psydonic_endurance"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/psydonic_endurance
-	effectedstats = list("constitution" = 1,"endurance" = 1) 
+	effectedstats = list("constitution" = 1,"endurance" = 1)
 
 /datum/status_effect/buff/psydonic_endurance/on_apply()
 	. = ..()
