@@ -2811,6 +2811,10 @@
 /mob/living/simple_animal/hostile/rogue/haunt,
 /turf/open/floor/rogue/herringbone,
 /area/rogue/under/cave/mazedungeon)
+"aVB" = (
+/obj/machinery/light/rogue/wallfire/candle,
+/turf/open/water/psydontears,
+/area/rogue/under/cave)
 "aVE" = (
 /obj/machinery/light/rogue/hearth,
 /obj/item/cooking/pan,
@@ -15788,9 +15792,7 @@
 /area/rogue/outdoors/mountains)
 "fjk" = (
 /obj/structure/stairs/stone,
-/turf/open/water/bath{
-	desc = "clear, lightly foamy water, perfect for dipping into after a long day."
-	},
+/turf/open/floor/rogue/blocks,
 /area/rogue/indoors/town/church/basement)
 "fjm" = (
 /mob/living/simple_animal/hostile/rogue/skeleton/bow,
@@ -37396,6 +37398,10 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/rogue/wood,
 /area/rogue/under/town/basement)
+"miQ" = (
+/obj/machinery/light/rogue/firebowl/standing/blue,
+/turf/open/floor/rogue/hexstone,
+/area/rogue/indoors/town/church/chapel)
 "miS" = (
 /obj/effect/spawner/lootdrop/roguetown/dungeon/weapons,
 /obj/structure/closet/crate/chest/crate,
@@ -43109,6 +43115,7 @@
 /obj/machinery/light/rogue/wallfire/candle/blue/l{
 	pixel_x = 32
 	},
+/obj/machinery/light/rogue/firebowl/standing/blue,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/town/church/chapel)
 "oaZ" = (
@@ -43714,6 +43721,10 @@
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/rogue/grass,
 /area/rogue/outdoors/rtfield)
+"ols" = (
+/obj/machinery/light/rogue/firebowl/standing/blue,
+/turf/open/floor/rogue/cobble,
+/area/rogue/indoors/town/church/chapel)
 "olz" = (
 /obj/structure/pillory{
 	lockid = list("church")
@@ -56380,6 +56391,10 @@
 /turf/open/floor/rogue/ruinedwood/chevron,
 /area/rogue/under/cave/dukecourt)
 "srF" = (
+/obj/machinery/light/rogue/wallfire/candle{
+	pixel_x = -26;
+	pixel_y = 0
+	},
 /turf/open/water/psydontears,
 /area/rogue/under/cave)
 "srI" = (
@@ -64482,6 +64497,10 @@
 /obj/item/book/rogue/naledi4,
 /turf/open/floor/rogue/blocks,
 /area/rogue/under/town/sewer)
+"uXh" = (
+/obj/machinery/light/rogue/firebowl/standing/blue,
+/turf/open/floor/rogue/herringbone,
+/area/rogue/indoors/town/church/chapel)
 "uXk" = (
 /turf/closed/mineral/random/rogue/high,
 /area/rogue/under/cave/goblindungeon)
@@ -68896,6 +68915,10 @@
 /obj/structure/fluff/statue/knight,
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/town/basement/keep)
+"wqE" = (
+/obj/machinery/light/rogue/wallfire/candle,
+/turf/open/floor/rogue/concrete,
+/area/rogue/indoors/town/church/chapel)
 "wqP" = (
 /obj/structure/mineral_door/wood/donjon/stone{
 	locked = 1;
@@ -173440,7 +173463,7 @@ qPv
 qPv
 qPv
 ogs
-srF
+aVB
 ogs
 ogs
 ogs
@@ -252579,7 +252602,7 @@ wTU
 ckz
 nMw
 jbB
-gQx
+ols
 bAg
 jbB
 cIK
@@ -254402,7 +254425,7 @@ mab
 bqZ
 dNM
 iRn
-iRn
+uXh
 sVb
 bCz
 bCz
@@ -254839,14 +254862,14 @@ nMw
 pXL
 nMw
 fvQ
-bqZ
+miQ
 gQx
 xPN
 jbB
 jbB
 jbB
 xPN
-bqZ
+miQ
 mab
 bqZ
 cAy
@@ -256202,7 +256225,7 @@ jbB
 xPN
 jbB
 jbB
-bqZ
+miQ
 mab
 bqZ
 cAy
@@ -258018,7 +258041,7 @@ mab
 bqZ
 dNM
 wLA
-iRn
+uXh
 eoB
 bCz
 bCz
@@ -375991,7 +376014,7 @@ sGj
 sGj
 sGj
 qdn
-qbZ
+wqE
 qbZ
 qdn
 kSK
