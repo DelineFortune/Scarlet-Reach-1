@@ -932,6 +932,19 @@
 				return TRUE
 	..()
 
+/obj/structure/fluff/statue/psydonbleeding
+	name = "ornamental astrata statue"
+	desc = "An ornamental stone statue of the sun Goddess Astrata, decorated with golden jewelry. Bless."
+	icon = 'icons/roguetown/misc/64х64.dmi'
+	icon_state = "PsydonStatue"
+
+/obj/structure/fluff/statue/astratacore
+	name = "ornamental astrata statue"
+	desc = "An ornamental stone statue of the sun Goddess Astrata, decorated with golden jewelry. Bless."
+	icon = 'icons/roguetown/misc/64х64.dmi'
+	icon_state = "AstrataStatue"
+
+
 /obj/structure/fluff/statue/evil
 	name = "idol"
 	desc = "A statue built to the robber-god, Matthios, who stole the gift of fire from the underworld. It is said that he grants the wishes of those pagan bandits (free folk) who feed him money and valuable metals."
