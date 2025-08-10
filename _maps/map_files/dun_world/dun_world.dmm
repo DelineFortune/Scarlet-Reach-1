@@ -50887,6 +50887,9 @@
 	},
 /turf/open/floor/rogue/concrete,
 /area/rogue/under/cavewet/bogcaves/sunkencity)
+"qED" = (
+/turf/closed/wall/psydonpass,
+/area/rogue/indoors/town/psydon/basement)
 "qEL" = (
 /obj/machinery/light/rogue/wallfire/candle/blue/r,
 /turf/open/floor/rogue/church,
@@ -165289,7 +165292,7 @@ tsB
 acF
 acF
 srF
-ryw
+qED
 lQm
 gfV
 tgK
@@ -172985,7 +172988,7 @@ ogs
 ogs
 ogs
 idG
-ryw
+qED
 idG
 uiL
 ddj
@@ -173901,7 +173904,7 @@ ogs
 ogs
 ogs
 lQm
-ryw
+qED
 srF
 vFS
 vFS
