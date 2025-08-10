@@ -493,13 +493,17 @@
 	if(!(our_area.church_area))
 		owner.remove_status_effect(/datum/status_effect/buff/churchbuff)
 
-
 /datum/status_effect/buff/citybuff/process()
+	. = ..()
+	if (QDELETED(owner) || !isliving(owner))
+		return
 
-	.=..()
-	var/area/rogue/our_area = get_area(owner)
-	if(!(our_area.town_area))
-		owner.remove_status_effect(/datum/status_effect/buff/citybuff)
+	if (!owner.client) return
+
+	var/area/A = get_area(owner)
+	if (!A)
+		owner.remove_status_effect(/datum/status_effect/buff/citybuff) 
+		return
 
 /atom/movable/screen/alert/status_effect/buff/healing
 	name = "Healing Miracle"

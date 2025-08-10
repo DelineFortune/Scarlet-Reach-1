@@ -31,14 +31,17 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 		guy.apply_status_effect(/datum/status_effect/buff/guardbuffone)
 
 
-/area/rogue/Entered(mob/living/carbon/human/guy)
+/area/rogue/Entered(atom/movable/A, atom/oldloc)
 	. = ..()
 
-	if (!guy.client)
+	if (!isliving(A))
 		return
+	var/mob/living/L = A
 
-	if (src.town_area && !guy.has_status_effect(/datum/status_effect/buff/citybuff))
-		guy.apply_status_effect(/datum/status_effect/buff/citybuff)
+	if (!L.client)
+		return
+	if (src.town_area && !L.has_status_effect(/datum/status_effect/buff/citybuff))
+		L.apply_status_effect(/datum/status_effect/buff/citybuff)
 
 /area/rogue/Entered(mob/living/carbon/human/guy)
 
