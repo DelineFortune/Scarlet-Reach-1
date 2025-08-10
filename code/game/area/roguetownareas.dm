@@ -34,10 +34,6 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 /area/rogue/Entered(mob/living/carbon/human/guy)
 	. = ..()
 
-	if (!isliving(A))
-		return
-	var/mob/living/L = A
-
 	if (!L.client)
 		return
 	if (src.town_area && !L.has_status_effect(/datum/status_effect/buff/citybuff))
