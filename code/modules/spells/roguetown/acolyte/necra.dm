@@ -352,14 +352,14 @@
 // BODY INTO COIN
 
 /obj/effect/proc_holder/spell/targeted/fieldburials
-    name = "Collect Coins"
+	name = "Collect Coins"
 	overlay_state = "consecrateburial"
-    include_user = FALSE
-    antimagic_allowed = TRUE
-    devotion_cost = 10
-    miracle = TRUE
-    invocation = "The undermaiden claims the fallen, I lay them to rest as my duty."
-    invocation_type = "whisper"
+	include_user = FALSE
+	antimagic_allowed = TRUE
+	devotion_cost = 10
+	miracle = TRUE
+	invocation = "The undermaiden claims the fallen, I lay them to rest as my duty."
+	invocation_type = "whisper"
 
 /obj/effect/proc_holder/spell/targeted/fieldburials/cast(list/targets, mob/living/user)
     if(!isliving(targets[1]))
