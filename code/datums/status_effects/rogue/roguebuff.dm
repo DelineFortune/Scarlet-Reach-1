@@ -371,6 +371,48 @@
 	desc = "This is my sanctuary. I can overpower any opposition that dares breach it."
 	icon_state = "buff"
 
+/atom/movable/screen/alert/status_effect/buff/psydonbuff
+	name = "Psydon Blessing"
+	desc = "ᛉ PSᛉDON ENDᛉRES! ᛉ"
+	icon_state = "buff"
+
+/atom/movable/screen/alert/status_effect/buff/churchbuff
+	name = "Church Defender"
+	desc = "This sacred ground is watched over by divine eyes. Violence here will not go unnoticed... nor unpunished."
+	icon_state = "tenbless"
+
+/atom/movable/screen/alert/status_effect/buff/citybuff
+	name = "The City"
+	desc = "The eyes of the city - mortal and divine - are upon you. Order is expected, chaos will be judged."
+	icon_state = "clash"
+	color = "#eeff00"
+
+/datum/status_effect/buff/psydonbuff
+	id = "psydonbuff"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/psydonbuff
+	effectedstats = list("constitution" = 3,"endurance" = 3, "speed" = 2, "strength" = 2) //Their underground only
+
+/datum/status_effect/buff/churchbuff
+	id = "churchbuff"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/churchbuff
+	effectedstats = list("constitution" = 2,"endurance" = 2, "speed" = 1, "strength" = 1) //Their church only
+
+/datum/status_effect/buff/citybuff
+	id = "citybuff"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/citybuff //Buff you are IN THE CITY no effect on stats
+
+/datum/status_effect/buff/wardenbuff
+	id = "wardenbuff"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/wardenbuff
+	effectedstats = list("speed" = 1, "perception" = 3) 
+
+
+/datum/status_effect/buff/wardenbuff
+	id = "wardenbuff"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/wardenbuff
+	effectedstats = list("speed" = 1, "perception" = 3) 		
+
+
 /datum/status_effect/buff/wardenbuff
 	id = "wardenbuff"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/wardenbuff

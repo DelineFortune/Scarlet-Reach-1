@@ -19,6 +19,8 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	var/keep_area = FALSE
 	var/tavern_area = FALSE
 	var/warden_area = FALSE
+	var/church_area = FALSE
+	var/psydon_area = FALSE
 	var/cell_area = FALSE
 	var/ceiling_protected = FALSE //Prevents tunneling into these from above
 
@@ -27,6 +29,13 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	. = ..()
 	if((src.town_area == TRUE) && HAS_TRAIT(guy, TRAIT_GUARDSMAN) && !guy.has_status_effect(/datum/status_effect/buff/guardbuffone)) //man at arms
 		guy.apply_status_effect(/datum/status_effect/buff/guardbuffone)
+
+
+/area/rogue/Entered(mob/living/carbon/human/guy)
+
+	. = ..()
+	if((src.town_area == TRUE) && !guy.has_status_effect(/datum/status_effect/buff/citybuff)) //any person
+		guy.apply_status_effect(/datum/status_effect/buff/citybuff)
 
 /area/rogue/Entered(mob/living/carbon/human/guy)
 
@@ -45,6 +54,26 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	. = ..()
 	if((src.cell_area == TRUE) && HAS_TRAIT(guy, TRAIT_DUNGEONMASTER) && !guy.has_status_effect(/datum/status_effect/buff/dungeoneerbuff)) // Dungeoneer
 		guy.apply_status_effect(/datum/status_effect/buff/dungeoneerbuff)
+
+
+/area/rogue/Entered(mob/living/carbon/human/guy)
+
+	. = ..()
+	if((src.church_area == TRUE) && HAS_TRAIT(guy, TRAIT_CLERGY) && !guy.has_status_effect(/datum/status_effect/buff/clergybuff)) // Templar/Priest/Churchling/Acolyte
+		guy.apply_status_effect(/datum/status_effect/buff/clergybuff)
+
+
+/area/rogue/Entered(mob/living/carbon/human/guy)
+
+	. = ..()
+	if((src.psydon_area == TRUE) && HAS_TRAIT(guy, PSYDONITE) && !guy.has_status_effect(/datum/status_effect/buff/psydonbuff)) // psydonite
+		guy.apply_status_effect(/datum/status_effect/buff/psydonbuff)
+
+/area/rogue/Entered(mob/living/carbon/human/guy)
+
+	. = ..()
+	if((src.cell_area == TRUE) && HAS_TRAIT(guy, TRAIT_DUNGEONMASTER) && !guy.has_status_effect(/datum/status_effect/buff/dungeoneerbuff)) // Dungeoneer
+		guy.apply_status_effect(/datum/status_effect/buff/dungeoneerbuff)				
 
 /area/rogue/indoors
 	name = "indoors rt"
@@ -837,24 +866,38 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	droning_sound_dusk = null
 	droning_sound_night = null
 	droning_sound_dawn = 'sound/music/area/churchdawn.ogg'
+	church_area = TRUE
 	converted_type = /area/rogue/outdoors/exposed/church
+
 /area/rogue/outdoors/exposed/church
 	icon_state = "church"
 	droning_sound = 'sound/music/area/church.ogg'
 	droning_sound_dusk = null
 	droning_sound_night = null
+	church_area = TRUE
 	droning_sound_dawn = 'sound/music/area/churchdawn.ogg'
 
 /area/rogue/indoors/town/church/chapel
 	icon_state = "chapel"
+	church_area = TRUE
 	first_time_text = "THE HOUSE OF THE TEN"
-
+	
 /area/rogue/indoors/town/church/basement
 	icon_state = "church"
 	droning_sound = 'sound/music/area/catacombs.ogg'
 	droning_sound_dusk = null
 	droning_sound_night = null
+	church_area = TRUE
 	first_time_text = "THE CRYPT OF THE TEN"
+
+/area/rogue/indoors/town/psydon/basement
+	icon_state = "psydon"
+	droning_sound = 'sound/music/area/catacombs.ogg'
+	droning_sound_dusk = null
+	droning_sound_night = null
+	psydon_area = TRUE
+	first_time_text = "THE SHRINE OF THE PSYDON"
+
 
 /area/rogue/indoors/town/fire_chamber
 	name = "incinerator"
