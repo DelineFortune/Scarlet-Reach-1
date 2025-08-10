@@ -59,21 +59,21 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 /area/rogue/Entered(mob/living/carbon/human/guy)
 
 	. = ..()
-	if((src.church_area == TRUE) && HAS_TRAIT(guy, TRAIT_CLERGY) && !guy.has_status_effect(/datum/status_effect/buff/clergybuff)) // Templar/Priest/Churchling/Acolyte
-		guy.apply_status_effect(/datum/status_effect/buff/clergybuff)
+	if((src.church_area == TRUE) && HAS_TRAIT(guy, TRAIT_CLERGY) && !guy.has_status_effect(/datum/status_effect/buff/churchbuff)) // Templar/Priest/Churchling/Acolyte
+		guy.apply_status_effect(/datum/status_effect/buff/churchbuff)
 
 
 /area/rogue/Entered(mob/living/carbon/human/guy)
 
 	. = ..()
-	if((src.psydon_area == TRUE) && HAS_TRAIT(guy, PSYDONITE) && !guy.has_status_effect(/datum/status_effect/buff/psydonbuff)) // psydonite
+	if((src.psydon_area == TRUE) && HAS_TRAIT(guy, TRAIT_PSYDONITE) && !guy.has_status_effect(/datum/status_effect/buff/psydonbuff)) // psydonite
 		guy.apply_status_effect(/datum/status_effect/buff/psydonbuff)
 
 /area/rogue/Entered(mob/living/carbon/human/guy)
 
 	. = ..()
 	if((src.cell_area == TRUE) && HAS_TRAIT(guy, TRAIT_DUNGEONMASTER) && !guy.has_status_effect(/datum/status_effect/buff/dungeoneerbuff)) // Dungeoneer
-		guy.apply_status_effect(/datum/status_effect/buff/dungeoneerbuff)				
+		guy.apply_status_effect(/datum/status_effect/buff/dungeoneerbuff)
 
 /area/rogue/indoors
 	name = "indoors rt"
@@ -881,7 +881,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	icon_state = "chapel"
 	church_area = TRUE
 	first_time_text = "THE HOUSE OF THE TEN"
-	
+
 /area/rogue/indoors/town/church/basement
 	icon_state = "church"
 	droning_sound = 'sound/music/area/catacombs.ogg'

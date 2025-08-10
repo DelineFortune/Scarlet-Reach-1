@@ -215,8 +215,8 @@
 /turf/closed/wall/psydonpass
     name = "mysterious wall"
     desc = "A strange wall, faintly shimmering."
-    icon = 'icons/turf/walls/wall.dmi'
-    icon_state = "wall"
+    icon = 'icons/turf/walls/stone_wall.dmi'
+    icon_state = "stone"
     explosion_block = 1
     baseturfs = list(/turf/open/floor/rogue/dirt/road)
 

@@ -518,7 +518,7 @@
 	water_reagent = /datum/reagent/water
 
 /turf/open/water/psydontears
-	name = "Tears of the Psydon"
+	name = "Tears of Psydon"
 	desc = "The ground weeps with the tears of Psydon. Warmth or agony - it depends on your faith."
 	icon = 'icons/turf/roguefloor.dmi'
 	icon_state = "water"
@@ -553,6 +553,6 @@
 			M.adjustToxLoss(-10)
 			M.adjustOxyLoss(-10)
 		else
-			M.apply_damage(25, BURN, BODY_ZONE_CHEST, forced = TRUE)
+			M.apply_damage(30, BURN, BODY_ZONE_CHEST, forced = TRUE)
 
 	last_effect = world.time

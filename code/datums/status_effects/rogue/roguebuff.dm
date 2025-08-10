@@ -477,6 +477,30 @@
 	. = ..()
 	REMOVE_TRAIT(owner, TRAIT_CIVILIZEDBARBARIAN, TRAIT_GENERIC)
 
+
+/datum/status_effect/buff/psydonbuff/process()
+
+	.=..()
+	var/area/rogue/our_area = get_area(owner)
+	if(!(our_area.psydonarea))
+		owner.remove_status_effect(/datum/status_effect/buff/psydonbuff)
+
+
+/datum/status_effect/buff/churchbuff/process()
+
+	.=..()
+	var/area/rogue/our_area = get_area(owner)
+	if(!(our_area.church_area))
+		owner.remove_status_effect(/datum/status_effect/buff/churchbuff)
+
+
+/datum/status_effect/buff/citybuff/process()
+
+	.=..()
+	var/area/rogue/our_area = get_area(owner)
+	if(!(our_area.city_area))
+		owner.remove_status_effect(/datum/status_effect/buff/citybuff)				
+
 /atom/movable/screen/alert/status_effect/buff/healing
 	name = "Healing Miracle"
 	desc = "Divine intervention relieves me of my ailments."
