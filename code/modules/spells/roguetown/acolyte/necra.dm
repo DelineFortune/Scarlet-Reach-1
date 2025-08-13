@@ -310,12 +310,12 @@
     releasedrain = 30
     recharge_time = 30 SECONDS
     req_items = list(/obj/item/clothing/neck/roguetown/psicross)
-    cast_without_targets = TRUE
     sound = 'sound/magic/churn.ogg'
     associated_skill = /datum/skill/magic/holy
     invocation = "The echoes of the departed stir, speak, O fallen one."
     invocation_type = "whisper"
     miracle = TRUE
+	chargetime = 2 SECONDS
     devotion_cost = 30
 
 /obj/effect/proc_holder/spell/invoked/speakwithdead/cast(list/targets, mob/user = usr)
@@ -331,19 +331,47 @@
         to_chat(user, "<font color='red'>They are not dead. Yet.</font>")
         return FALSE
 
-/proc/speakwithdead(mob/user, mob/dead/target)
+/proc/speakwithdead(mob/user, mob/living/target)
     if(target.stat == DEAD && target.mind)
         var/message = input(user, "You speak to the spirit of [target.real_name]. What will you say?", "Speak with the Dead") as text|null
 
         if(message)
-            to_chat(target.mind.current, "<span style='color:gold'><b>[user.real_name]</b> says: \"[message]\"</span>")
+            if(target.mind.current)
+                to_chat(target.mind.current, "<span style='color:gold'><b>[user.real_name]</b> says: \"[message]\"</span>")
+
+            var/mob/dead/observer/ghost = null
+
+            for (var/mob/dead/observer/G in world)
+                if (G.mind == target.mind)
+                    ghost = G
+                    break
+
+            if (!ghost && target.mind && target.mind.key)
+                var/expected_ckey = ckey(target.mind.key)
+                for (var/mob/dead/observer/G2 in world)
+                    if (G2.client && ckey(G2.key) == expected_ckey)
+                        ghost = G2
+                        break
+
+            if (ghost && ghost != target.mind.current)
+                to_chat(ghost, "<span style='color:gold'><b>[user.real_name]</b> says: \"[message]\"</span>")
+
             to_chat(user, "<span style='color:gold'>You say to the spirit: \"[message]\"</span>")
 
-            var/spirit_message = input(target.mind.current, "The spirit of [target.real_name] responds: What will you say?", "Spirit's Response") as text|null
-            if(spirit_message)
-                to_chat(user, "<span style='color:silver'><i>The spirit whispers:</i> \"[spirit_message]\"</span>")
+            var/mob/replier = null
+            if (ghost && ghost.client)
+                replier = ghost
+            else if (target.mind.current && target.mind.current.client)
+                replier = target.mind.current
+
+            if(replier)
+                var/spirit_message = input(replier, "The spirit of [target.real_name] responds: What will you say?", "Spirit's Response") as text|null
+                if(spirit_message)
+                    to_chat(user, "<span style='color:silver'><i>The spirit whispers:</i> \"[spirit_message]\"</span>")
+                else
+                    to_chat(user, "<span style='color:#aaaaaa'><i>The spirit chooses to remain silent...</i></span>")
             else
-                to_chat(user, "<span style='color:#aaaaaa'><i>The spirit chooses to remain silent...</i></span>")
+                to_chat(user, "<span style='color:#aaaaaa'><i>The spirit cannot answer right now...</i></span>")
         else
             to_chat(user, "<span style='color:#aaaaaa'><i>You choose not to speak.</i></span>")
     else
@@ -351,17 +379,16 @@
 
 // BODY INTO COIN
 
-/obj/effect/proc_holder/spell/targeted/fieldburials
+/obj/effect/proc_holder/spell/invoked/fieldburials
 	name = "Collect Coins"
 	overlay_state = "consecrateburial"
-	include_user = FALSE
 	antimagic_allowed = TRUE
 	devotion_cost = 10
 	miracle = TRUE
 	invocation = "The undermaiden claims the fallen, I lay them to rest as my duty."
 	invocation_type = "whisper"
 
-/obj/effect/proc_holder/spell/targeted/fieldburials/cast(list/targets, mob/living/user)
+/obj/effect/proc_holder/spell/invoked/fieldburials/cast(list/targets, mob/living/user)
     if(!isliving(targets[1]))
         revert_cast()
         return FALSE
