@@ -315,7 +315,6 @@
     invocation = "The echoes of the departed stir, speak, O fallen one."
     invocation_type = "whisper"
     miracle = TRUE
-	chargetime = 2 SECONDS
     devotion_cost = 30
 
 /obj/effect/proc_holder/spell/invoked/speakwithdead/cast(list/targets, mob/user = usr)
@@ -385,17 +384,18 @@
 	antimagic_allowed = TRUE
 	devotion_cost = 10
 	miracle = TRUE
-	invocation = "The undermaiden claims the fallen, I lay them to rest as my duty."
 	invocation_type = "whisper"
 
 /obj/effect/proc_holder/spell/invoked/fieldburials/cast(list/targets, mob/living/user)
+    . = ..()
+
     if(!isliving(targets[1]))
         revert_cast()
         return FALSE
 
     var/mob/living/target = targets[1]
     if(target.stat < DEAD)
-        to_chat(user, span_warning("They still draw breath"))
+        to_chat(user, span_warning("They're still alive!"))
         revert_cast()
         return FALSE
 
