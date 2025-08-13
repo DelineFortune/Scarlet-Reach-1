@@ -365,7 +365,7 @@
                 replier = target.mind.current
 
             if(replier)
-                var/spirit_message = input(replier, "The spirit of [target.real_name] responds: What will you say?", "Spirit's Response") as text|null
+                var/spirit_message = input(replier, "An acolyte of Necra named [user.real_name] seeks your attention. What is your reply?", "Spirit's Response") as text|null
                 if(spirit_message)
                     to_chat(user, "<span style='color:silver'><i>The spirit whispers:</i> \"[spirit_message]\"</span>")
                 else
