@@ -372,7 +372,7 @@
         revert_cast()
         return FALSE
 
-    if(world.time <= target.mob_timers["lastdied"] + 5 MINUTES)
+    if(world.time <= target.mob_timers["lastdied"] + 15 MINUTES)
         to_chat(user, span_warning("The body is too fresh for the rite."))
         revert_cast()
         return FALSE
