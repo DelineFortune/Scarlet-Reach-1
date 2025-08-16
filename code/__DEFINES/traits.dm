@@ -67,6 +67,7 @@
 #define TRAIT_PERMAMUTE "Permanent Mute"
 #define TRAIT_HERESIARCH "Forbidden Knowledge" //allows entry to ascendant church
 #define TRAIT_EXCOMMUNICATED "Excommunicated" //cannot be target of healing miracles of Ten or anastasia or cure rot
+#define TRAIT_CLERGY "Clergy" // City clergy
 
 
 //Hearthstone port (Tracking)
@@ -99,6 +100,7 @@
 #define TRAIT_LEECHIMMUNE "Unleechable" //leeches wont attach in bog squares + dendor boon.
 #define TRAIT_LONGSTRIDER "Longstrider"
 #define TRAIT_PSYDONITE "Psydonite Devotion" // Anti-Miracles on a selective basis, anastasis / cure rot and ENDURE still apply. Slow passive wound healing while you have blood.
+
 
 // PATRON GOD TRAITS Curses
 
@@ -315,7 +317,8 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_EORAN_SERENE = span_greentext("Eora has blessed me with all-encompassing serenity. I feel no more stress."),
 	TRAIT_NECRAS_VOW = span_warning("I've pledged myself to Necra. If I fall, I am Hers."),
 	TRAIT_DYES = span_notice("I know my way around pigments and shades, and I'm able to create the exact colors I want in a dye station."),
-	TRAIT_HERESIARCH = span_warning("I know of sacred sites of worship where followers of the Ascendants convene, and the path to the nearest conclave is etched into my memory.")
+	TRAIT_HERESIARCH = span_warning("I know of sacred sites of worship where followers of the Ascendants convene, and the path to the nearest conclave is etched into my memory."),
+	TRAIT_CLERGY = span_warning("I am a servant of the local House of the Ten.")
 ))
 
 // trait accessor defines

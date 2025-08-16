@@ -376,6 +376,30 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/wardenbuff
 	effectedstats = list("speed" = 1, "perception" = 3)
 
+/atom/movable/screen/alert/status_effect/buff/psydonbuff
+	name = "Psydon Blessing"
+	desc = "ᛉ PSᛉDON ENDᛉRES! ᛉ"
+	icon_state = "buff"
+
+/atom/movable/screen/alert/status_effect/buff/churchbuff
+	name = "Church Defender"
+	desc = "This sacred ground is watched over by divine eyes. Violence here will not go unnoticed... nor unpunished."
+	icon_state = "tenbless"
+
+/datum/status_effect/buff/psydonbuff
+	id = "psydonbuff"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/psydonbuff
+	effectedstats = list("constitution" = 3,"endurance" = 3, "speed" = 2, "strength" = 2) //Their underground only
+
+/datum/status_effect/buff/churchbuff
+	id = "churchbuff"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/churchbuff
+	effectedstats = list("constitution" = 2,"endurance" = 2, "speed" = 1, "strength" = 1) //Their church only
+
+/datum/status_effect/buff/citybuff
+	id = "citybuff"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/citybuff //Buff you are IN THE CITY no effect on stats
+
 /datum/status_effect/buff/barkeepbuff
 	id = "barkeepbuff"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/barkeepbuff
@@ -397,6 +421,23 @@
 	id = "dungeoneerbuff"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/dungeoneerbuff
 	effectedstats = list("constitution" = 1,"endurance" = 1, "strength" = 2)//This only works in 2 small areas on the entire map
+
+
+/datum/status_effect/buff/psydonbuff/process()
+
+	.=..()
+	var/area/rogue/our_area = get_area(owner)
+	if(!(our_area.psydon_area))
+		owner.remove_status_effect(/datum/status_effect/buff/psydonbuff)
+
+
+/datum/status_effect/buff/churchbuff/process()
+
+	.=..()
+	var/area/rogue/our_area = get_area(owner)
+	if(!(our_area.church_area))
+		owner.remove_status_effect(/datum/status_effect/buff/churchbuff)
+	
 
 /datum/status_effect/buff/guardbuffone/process()
 
