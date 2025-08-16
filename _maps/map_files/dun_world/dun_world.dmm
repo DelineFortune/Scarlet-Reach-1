@@ -26748,6 +26748,7 @@
 /obj/item/quicksilver,
 /obj/item/reagent_containers/food/snacks/grown/rogue/fyritius,
 /obj/item/paper/inquisition_poultice_info,
+/obj/machinery/light/rogue/torchholder/l,
 /turf/open/floor/rogue/herringbone,
 /area/rogue/indoors/town/psydon/basement)
 "ivQ" = (
@@ -50263,6 +50264,16 @@
 "pXg" = (
 /turf/open/floor/rogue/greenstone,
 /area/rogue/outdoors/mountains/decap/gunduzirak)
+"pXl" = (
+/obj/structure/rack/rogue,
+/obj/item/clothing/suit/roguetown/armor/plate/half/fluted/ornate,
+/obj/item/clothing/head/roguetown/helmet/heavy/psydonbarbute,
+/obj/item/storage/belt/rogue/leather/steel/tasset,
+/obj/machinery/light/rogue/torchholder/l{
+	dir = 8
+	},
+/turf/open/floor/rogue/church,
+/area/rogue/indoors/town/psydon/basement)
 "pXm" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -55465,7 +55476,7 @@
 /obj/machinery/light/rogue/torchholder/l{
 	dir = 8
 	},
-/turf/closed/mineral/random/rogue,
+/turf/open/floor/rogue/naturalstone,
 /area/rogue/indoors/town/psydon/basement)
 "rDH" = (
 /obj/effect/decal/mossy,
@@ -370793,7 +370804,7 @@ iPO
 iPO
 iPO
 nsG
-vDJ
+gkW
 qUS
 qAk
 iHp
@@ -376217,7 +376228,7 @@ iPO
 iPO
 iPO
 nsG
-gkW
+vDJ
 qUS
 qUS
 qUS
@@ -523517,7 +523528,7 @@ bGf
 bGf
 bGf
 eab
-uGg
+pXl
 uGg
 utx
 fzU
