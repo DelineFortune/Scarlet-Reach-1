@@ -396,9 +396,6 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/churchbuff
 	effectedstats = list("constitution" = 2,"endurance" = 2, "speed" = 1, "strength" = 1) //Their church only
 
-/datum/status_effect/buff/citybuff
-	id = "citybuff"
-	alert_type = /atom/movable/screen/alert/status_effect/buff/citybuff //Buff you are IN THE CITY no effect on stats
 
 /datum/status_effect/buff/barkeepbuff
 	id = "barkeepbuff"
@@ -437,7 +434,7 @@
 	var/area/rogue/our_area = get_area(owner)
 	if(!(our_area.church_area))
 		owner.remove_status_effect(/datum/status_effect/buff/churchbuff)
-	
+
 
 /datum/status_effect/buff/guardbuffone/process()
 
