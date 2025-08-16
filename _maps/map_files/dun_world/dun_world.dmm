@@ -192,10 +192,6 @@
 	dir = 8
 	},
 /area/rogue/indoors/town/manor)
-"adU" = (
-/obj/structure/stairs/stone,
-/turf/closed/wall/mineral/rogue/decostone/long,
-/area/rogue/indoors/town/psydon/basement)
 "adW" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -174131,8 +174127,8 @@ fZm
 qZA
 qZA
 qZA
+qZA
 rDC
-adU
 ogs
 miF
 miF
