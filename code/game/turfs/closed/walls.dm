@@ -232,7 +232,7 @@
     density = FALSE
     opacity = FALSE
     icon_state = ""
-    playsound(src, 'sound/misc/area.ogg', 100, FALSE)
+    playsound(src, 'sound/misc/area.ogg', 10, FALSE)
 
     addtimer(CALLBACK(src, PROC_REF(reappear)), 10 SECONDS)
 
@@ -240,4 +240,4 @@
     density = TRUE
     opacity = TRUE
     icon_state = initial(icon_state)
-    playsound(src, 'sound/misc/area.ogg', 100, FALSE)
+    playsound(src, 'sound/misc/area.ogg', 10, FALSE)
