@@ -7015,6 +7015,12 @@
 /obj/machinery/light/rogue/wallfire/candle/l,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/town)
+"clu" = (
+/obj/structure/flora/roguegrass,
+/obj/structure/ladder,
+/obj/structure/flora/roguegrass/bush,
+/turf/open/floor/rogue/grass,
+/area/rogue/indoors/cave)
 "clw" = (
 /turf/open/floor/rogue/grass,
 /area/rogue/indoors/cave)
@@ -21654,6 +21660,10 @@
 "gTh" = (
 /turf/closed/wall/mineral/rogue/wooddark,
 /area/rogue/outdoors/woods)
+"gTm" = (
+/obj/structure/reliquarybox,
+/turf/open/floor/rogue/church,
+/area/rogue/indoors/town/psydon/basement)
 "gTo" = (
 /obj/structure/mannequin/male,
 /obj/item/clothing/suit/roguetown/shirt/tunic/noblecoat,
@@ -29171,6 +29181,11 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/rogue/volcanic,
 /area/rogue/outdoors/mountains/decap/stepbelow)
+"jia" = (
+/obj/structure/ladder,
+/obj/structure/flora/roguegrass/bush,
+/turf/open/floor/rogue/grass,
+/area/rogue/outdoors/beach/forest)
 "jib" = (
 /turf/closed/mineral/rogue/salt,
 /area/rogue/indoors/cave)
@@ -33585,6 +33600,13 @@
 /obj/structure/flora/roguetree/burnt,
 /turf/open/floor/rogue/dirt,
 /area/rogue/under/underdark)
+"kFa" = (
+/obj/machinery/light/rogue/torchholder/l{
+	dir = 8
+	},
+/obj/structure/ladder,
+/turf/open/water/psydontears,
+/area/rogue/indoors/town/psydon/basement)
 "kFe" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
@@ -174567,8 +174589,8 @@ ujm
 ujm
 ujm
 ujm
-ujm
-ujm
+qdA
+uhV
 ujm
 ujm
 ujm
@@ -175018,10 +175040,10 @@ acF
 qPv
 qPv
 qPv
-qPv
-qPv
-qPv
-qPv
+ujm
+mab
+mab
+ujm
 qPv
 qPv
 bhJ
@@ -175470,10 +175492,10 @@ acF
 qPv
 qPv
 qPv
-qPv
-qPv
-qPv
-qPv
+ujm
+kFa
+mab
+ujm
 qPv
 qPv
 bhJ
@@ -175922,10 +175944,10 @@ tIH
 qPv
 qPv
 qPv
-qPv
-qPv
-qPv
-qPv
+ujm
+ujm
+ujm
+ujm
 qPv
 qPv
 bhJ
@@ -290732,7 +290754,7 @@ qPv
 qPv
 qPv
 ujm
-qyE
+clu
 acF
 vuw
 vuw
@@ -405993,7 +406015,7 @@ qPv
 qPv
 qPv
 qPv
-lpq
+jia
 lpq
 vMR
 vMR
@@ -522172,7 +522194,7 @@ cou
 wEI
 gWK
 gWK
-kQk
+gTm
 eab
 bGf
 bGf
