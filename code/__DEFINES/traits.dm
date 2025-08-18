@@ -320,8 +320,8 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_DYES = span_notice("I know my way around pigments and shades, and I'm able to create the exact colors I want in a dye station."),
 	TRAIT_HERESIARCH = span_warning("I know of sacred sites of worship where followers of the Ascendants convene, and the path to the nearest conclave is etched into my memory."),
 	TRAIT_GOODWRITER = span_notice("I'm proficient at writing. Any skillbooks made by me will allow the reader to learn the subject more quickly."),
-  TRAIT_CLERGY = span_warning("I am a servant of the local House of the Ten.")
-)
+  	TRAIT_CLERGY = span_warning("I am a servant of the local House of the Ten.")
+))
 
 // trait accessor defines
 #define ADD_TRAIT(target, trait, source) \
