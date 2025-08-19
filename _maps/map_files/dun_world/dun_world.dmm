@@ -10961,7 +10961,7 @@
 /obj/structure/mineral_door/wood/donjon/stone{
 	lockid = "inquisition"
 	},
-/turf/open/floor/rogue/dirt/road,
+/turf/open/floor/rogue/church,
 /area/rogue/indoors/town/psydon/basement)
 "dzZ" = (
 /mob/living/simple_animal/hostile/rogue/skeleton/spear,
@@ -11236,7 +11236,7 @@
 /obj/structure/gate{
 	gid = "thronegate";
 	name = "The House of the Ten";
-	redstone_id = "thronegate"
+	redstone_id = "churchgates1"
 	},
 /turf/open/floor/rogue/churchmarble,
 /area/rogue/indoors/town/church/chapel)
@@ -26406,10 +26406,6 @@
 	},
 /turf/open/floor/rogue/cobblerock,
 /area/rogue/outdoors/exposed/town/keep)
-"iqG" = (
-/obj/structure/stairs,
-/turf/open/floor/rogue/cobble,
-/area/rogue/indoors/town/church/basement)
 "iqH" = (
 /obj/structure/stairs{
 	dir = 1
@@ -39682,7 +39678,7 @@
 	dir = 4;
 	gid = "thronegate";
 	pixel_x = -7;
-	redstone_id = "church1"
+	redstone_id = "churchgates1"
 	},
 /obj/machinery/light/rogue/wallfire/candle{
 	pixel_y = -32
@@ -143454,7 +143450,7 @@ llO
 llO
 ber
 lfr
-iqG
+llO
 llO
 llO
 llO
@@ -143906,7 +143902,7 @@ llO
 pvi
 lfr
 lfr
-iqG
+llO
 llO
 llO
 llO
@@ -262345,7 +262341,7 @@ gTY
 gTY
 gTY
 gTY
-qyR
+gTY
 qyR
 sns
 sns
@@ -490585,7 +490581,7 @@ bGf
 bGf
 amw
 amw
-iBk
+amw
 amw
 amw
 fue
