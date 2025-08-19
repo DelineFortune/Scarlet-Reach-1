@@ -8340,7 +8340,7 @@
 /turf/open/floor/rogue/grass,
 /area/rogue/outdoors/beach)
 "cHv" = (
-/turf/open/water/bath,
+/turf/open/water,
 /area/rogue/outdoors/town)
 "cHB" = (
 /obj/structure/fluff/walldeco/rpainting/forest{
@@ -44635,6 +44635,9 @@
 	},
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/outdoors/mountains/decap/gunduzirak)
+"ogD" = (
+/turf/open/water,
+/area/rogue/indoors/town/church/chapel)
 "ogL" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -371747,7 +371750,7 @@ ftG
 ftG
 iPO
 qVU
-mKN
+ogD
 oKc
 gTY
 oKc
@@ -372199,7 +372202,7 @@ vuc
 vuc
 iPO
 qVU
-mKN
+ogD
 uKr
 tCl
 rBs
@@ -374911,7 +374914,7 @@ ftG
 ftG
 iPO
 qVU
-mKN
+ogD
 uKr
 tCl
 gMf
@@ -375363,7 +375366,7 @@ vuc
 vuc
 iPO
 qVU
-mKN
+ogD
 gTY
 gTY
 gTY
