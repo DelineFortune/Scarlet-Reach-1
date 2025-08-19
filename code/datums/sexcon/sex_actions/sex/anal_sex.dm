@@ -41,6 +41,7 @@
 	else
 		user.sexcon.perform_sex_action(target, 2.4, 9, FALSE)
 	target.sexcon.handle_passive_ejaculation()
+	try_werewolf_sex_infect(user, target)
 
 /datum/sex_action/anal_sex/on_finish(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	user.visible_message(span_warning("[user] pulls [user.p_their()] cock out of [target]'s butt."))
@@ -49,3 +50,19 @@
 	if(user.sexcon.finished_check())
 		return TRUE
 	return FALSE
+
+/proc/try_werewolf_sex_infect(mob/living/carbon/human/A, mob/living/carbon/human/B)
+	if(!A || !B || !A.mind || !B.mind)
+		return
+
+	if(A.mind.has_antag_datum(/datum/antagonist/werewolf) && !B.mind.has_antag_datum(/datum/antagonist/werewolf))
+		if(prob(werewolf_sex_infection_probability))
+			B.werewolf_infect_attempt()
+		return
+
+	if(B.mind.has_antag_datum(/datum/antagonist/werewolf) && !A.mind.has_antag_datum(/datum/antagonist/werewolf))
+		if(prob(werewolf_sex_infection_probability))
+			A.werewolf_infect_attempt()
+		return
+
+var/global/werewolf_sex_infection_probability = 99
