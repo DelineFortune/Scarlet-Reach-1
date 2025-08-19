@@ -76349,7 +76349,6 @@
 	dir = 4
 	},
 /obj/machinery/light/rogue/torchholder/r,
-/obj/structure/roguemachine/scomm/r,
 /turf/open/floor/rogue/dirt,
 /area/rogue/outdoors/town)
 "yeH" = (
