@@ -35,6 +35,7 @@
 		user.visible_message(span_love("[user] cums into [target]'s throat!"))
 		user.sexcon.cum_into()
 		user.virginity = FALSE
+		try_werewolf_sex_infect(user, target)
 
 	if(user.sexcon.considered_limp())
 		user.sexcon.perform_sex_action(target, 0, 2, FALSE)

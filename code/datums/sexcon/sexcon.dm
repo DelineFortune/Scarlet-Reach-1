@@ -725,3 +725,18 @@
 			return "<span class='love_high'>[string]</span>"
 		if(SEX_FORCE_EXTREME)
 			return "<span class='love_extreme'>[string]</span>"
+
+/proc/try_werewolf_sex_infect(mob/living/carbon/human/A, mob/living/carbon/human/B)
+	if(!A || !B || !A.mind || !B.mind) return
+
+	if(A.mind.has_antag_datum(/datum/antagonist/werewolf) && !B.mind.has_antag_datum(/datum/antagonist/werewolf))
+		if(B.can_werewolf() && prob(werewolf_sex_infection_probability))
+			B.werewolf_infect_attempt()
+		return
+
+	if(B.mind.has_antag_datum(/datum/antagonist/werewolf) && !A.mind.has_antag_datum(/datum/antagonist/werewolf))
+		if(A.can_werewolf() && prob(werewolf_sex_infection_probability))
+			A.werewolf_infect_attempt()
+		return
+
+var/global/werewolf_sex_infection_probability = 25 // same chance as PREGNANCY

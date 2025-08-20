@@ -40,6 +40,7 @@
 		target.visible_message(span_love("[target] cums into [user]'s butt!"))
 		target.sexcon.cum_into()
 		target.virginity = FALSE
+		try_werewolf_sex_infect(user, target)
 
 /datum/sex_action/anal_ride_sex/on_finish(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	user.visible_message(span_warning("[user] gets off [target]."))
