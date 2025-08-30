@@ -194,26 +194,6 @@
 	after_ejaculation()
 	if(!oral)
 		after_intimate_climax()
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
-=======
-=======
-=======
-
->>>>>>> Stashed changes
-
->>>>>>> Stashed changes
-
->>>>>>> Stashed changes
-
->>>>>>> Stashed changes
-
->>>>>>> Stashed changes
 
 /datum/sex_controller/proc/knot_penis_type()
 	var/obj/item/organ/penis/penis = user.getorganslot(ORGAN_SLOT_PENIS)
@@ -611,7 +591,7 @@
 			to_chat(target, span_love("Our loving is a true TRIUMPH!"))
 
 	if(ishuman(user) && ishuman(target) && user.client && target.client)
-		erosia_register_consensual_pair(user, target)
+		eora_register_consensual_pair(user, target)
 
 /datum/sex_controller/proc/just_ejaculated()
 	return (last_ejaculation_time + 2 SECONDS >= world.time)

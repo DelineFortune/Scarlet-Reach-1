@@ -436,7 +436,7 @@ obj/item/artefact/necra_censer/attack_self(mob/user)
 					var/miss = max(S.plant.maturation_time - S.growth_time, 0)
 					if(miss > 0)
 						S.add_growth(miss)
-			if("produce")
+			if("produce") //mayhaps too op will see
 				if(!S.plant_dead)
 					if(!S.matured)
 						var/miss2 = max(S.plant.maturation_time - S.growth_time, 0)
@@ -614,15 +614,15 @@ obj/item/artefact/necra_censer/attack_self(mob/user)
 // --------------------------
 
 /*========================================
-  Eora's Heart — partner viewer
+  Eora's Heart 
   -----------------------------------------
-  • Use on self: shows your unique partners (names) this round
+  • Use on self: shows your unique partners (names) this week
   • Use on target: shows their unique partners (names) this round
 ========================================*/
 
 /obj/item/artefact/eora_heart
 	name = "Eora's Heart"
-	desc = "A velvet heart dedicated to Eora. It remembers the names of bonds formed this round."
+	desc = "A velvet heart dedicated to Eora. It remembers the names of bonds formed this week."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "eora_heart"
 	item_state = "eora_heart"
@@ -631,8 +631,8 @@ obj/item/artefact/necra_censer/attack_self(mob/user)
 
 /obj/item/artefact/eora_heart/examine(mob/user)
 	. = ..()
-	. += "<hr><span class='info'>Use in hand: show your unique partners (names) this round.</span><br>"
-	. += "<span class='info'>Use on a player: show their unique partners (names) this round.</span><br>"
+	. += "<hr><span class='info'>Use in hand: show your sex partners you had this week.</span><br>" //based on unique procs not logs so no anal oral vagnal stat sorry (i have removed ckey/vv check for it)
+	. += "<span class='info'>Use on a player: show their unique sex partners they had this week.</span><br>"
 
 /obj/item/artefact/eora_heart/attack_self(mob/user)
 	if(world.time < last_used + 300)
