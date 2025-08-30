@@ -5,19 +5,6 @@
     /obj/item/ingot/purifiedaalloy \
 )
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*============
 Malum's tool
 ============*/
@@ -327,7 +314,7 @@ obj/item/artefact/necra_censer/attack_self(mob/user)
   optional bless, and growth modes incl. KILL
 =========================================*/
 
-/obj/item/artefact/dendor_hose
+/obj/item/artefact/dendor_hose //bless your tree with its piss
 	name = "Dendor's Endless Hose"
 	desc = "A living crook of wood that bends soil to the Treefather’s will. Click soil to add ±100 water/nutriment, bless, or affect growth." //Dendor's piss
 	icon = 'icons/roguetown/items/misc.dmi'
@@ -623,43 +610,45 @@ obj/item/artefact/necra_censer/attack_self(mob/user)
 
 
 // --------------------------
-// Artefact: Eora's Locket
+// Artefact: Eora's Heart
 // --------------------------
 
 /*========================================
-  Eora's Velvet Locket — partner viewer
+  Eora's Heart — partner viewer
   -----------------------------------------
-  • Use on target: shows their erp tab statisticc 
+  • Use on self: shows your unique partners (names) this round
+  • Use on target: shows their unique partners (names) this round
 ========================================*/
 
-/obj/item/artefact/erosia_partner_locket
-	name = "Erosia’s Velvet Locket"
-	desc = "A velvet locket dedicated to Erosia. The heart remembers names of bonds formed this round."
+/obj/item/artefact/eora_heart
+	name = "Eora's Heart"
+	desc = "A velvet heart dedicated to Eora. It remembers the names of bonds formed this round."
 	icon = 'icons/roguetown/items/misc.dmi'
-	icon_state = "erosia_locket"
-	item_state = "erosia_locket"
+	icon_state = "eora_heart"
+	item_state = "eora_heart"
 	w_class = WEIGHT_CLASS_TINY
+	var/last_used = 0
 
-/obj/item/artefact/erosia_partner_locket/examine(mob/user)
+/obj/item/artefact/eora_heart/examine(mob/user)
 	. = ..()
-	. += "<hr><span class='info'>Use in hand: show your unique partners (names) this week.</span><br>"
-	. += "<span class='info'>Use on a player: show their unique partners (names) they had sex within week.</span><br>"
+	. += "<hr><span class='info'>Use in hand: show your unique partners (names) this round.</span><br>"
+	. += "<span class='info'>Use on a player: show their unique partners (names) this round.</span><br>"
 
-/obj/item/artefact/erosia_partner_locket/attack_self(mob/user)
+/obj/item/artefact/eora_heart/attack_self(mob/user)
 	if(world.time < last_used + 300)
-		to_chat(user, span_warning("The locket is quiet. Give it a moment."))
+		to_chat(user, span_warning("The heart is quiet. Give it a moment."))
 		return
 	last_used = world.time
 
 	if(!ishuman(user) || !user.client)
-		to_chat(user, span_warning("The locket needs a living heart to answer."))
+		to_chat(user, span_warning("The heart needs a living player to answer."))
 		return
 
 	var/mob/living/carbon/human/H = user
-	var/cnt = erosia_get_partner_count(H)
-	var/list/names = erosia_get_partner_names(H)
+	var/cnt = eora_get_partner_count(H)
+	var/list/names = eora_get_partner_names(H)
 
-	to_chat(user, span_notice("Eora's Whisper: You have **[cnt]** unique partner[ cnt==1 ? "" : "s"] this round."))
+	to_chat(user, span_notice("Eora's Whisper: You have <b>[cnt]</b> unique partner[cnt==1 ? "" : "s"] this round."))
 	if(names && names.len)
 		to_chat(user, "<span class='info'>Names:</span>")
 		for(var/N in names)
@@ -669,27 +658,27 @@ obj/item/artefact/necra_censer/attack_self(mob/user)
 
 	playsound(user, 'sound/magic/whiteflame.ogg', 50, FALSE)
 
-/obj/item/artefact/erosia_partner_locket/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/artefact/eora_heart/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	. = ..()
 	if(!proximity_flag) return
 
 	if(world.time < last_used + 300)
-		to_chat(user, span_warning("The locket is quiet. Give it a moment."))
+		to_chat(user, span_warning("The heart is quiet. Give it a moment."))
 		return
 	last_used = world.time
 
 	if(!isliving(target))
-		to_chat(user, span_warning("The locket only answers for living hearts."))
+		to_chat(user, span_warning("The heart only answers for living beings."))
 		return
 	if(!ishuman(target) || !target:client)
-		to_chat(user, span_warning("The locket only tallies players."))
+		to_chat(user, span_warning("The heart only tallies players."))
 		return
 
 	var/mob/living/carbon/human/H = target
-	var/cnt = erosia_get_partner_count(H)
-	var/list/names = erosia_get_partner_names(H)
+	var/cnt = eora_get_partner_count(H)
+	var/list/names = eora_get_partner_names(H)
 
-	to_chat(user, span_notice("Erosia’s Whisper: [H.name] has **[cnt]** unique partner[ cnt==1 ? "" : "s"] this round."))
+	to_chat(user, span_notice("Eora's Whisper: [html_encode(H.name)] has <b>[cnt]</b> unique partner[cnt==1 ? "" : "s"] this round."))
 	if(names && names.len)
 		to_chat(user, "<span class='info'>Names:</span>")
 		for(var/N in names)
@@ -698,92 +687,92 @@ obj/item/artefact/necra_censer/attack_self(mob/user)
 		to_chat(user, "<span class='info'>No names to show.</span>")
 
 	playsound(user, 'sound/magic/whiteflame.ogg', 50, FALSE)
+
 
 // --------------------------
 // Round-local registries
 // --------------------------
 
-var/global/list/EROSIA_PARTNERS_BY_ID = list()
-
-var/global/list/EROSIA_ID_NAME = list()
+var/global/list/EORA_PARTNERS_BY_ID = list()
+var/global/list/EORA_ID_NAME = list()
 
 
 // --------------------------
-// Helpers procs egistries
+// Helper procs (registries)
 // --------------------------
 
-/proc/erosia_get_round_id(mob/living/carbon/human/H)
+/proc/eora_get_round_id(mob/living/carbon/human/H)
 	if(!H) return null
 	if(H.mind) return REF(H.mind)
 	return REF(H)
 
-/proc/erosia_update_name(mob/living/carbon/human/H)
+/proc/eora_update_name(mob/living/carbon/human/H)
 	if(!H) return
-	var/id = erosia_get_round_id(H)
+	var/id = eora_get_round_id(H)
 	if(!id) return
 	var/display = H.real_name ? H.real_name : H.name
 	if(display && length(display))
-		EROSIA_ID_NAME[id] = "[display]"
+		EORA_ID_NAME[id] = "[display]"
 
-/proc/erosia_lookup_name_by_id(id)
+/proc/eora_lookup_name_by_id(id)
 	if(!id) return "Unknown"
 
 	if(islist(GLOB?.human_list))
 		for(var/mob/living/carbon/human/H in GLOB.human_list)
-			if(erosia_get_round_id(H) == id)
+			if(eora_get_round_id(H) == id)
 				return H.real_name ? H.real_name : H.name
 	else
 		for(var/mob/living/carbon/human/H in world)
-			if(erosia_get_round_id(H) == id)
+			if(eora_get_round_id(H) == id)
 				return H.real_name ? H.real_name : H.name
 
-	if(EROSIA_ID_NAME[id])
-		return "[EROSIA_ID_NAME[id]]"
+	if(EORA_ID_NAME[id])
+		return "[EORA_ID_NAME[id]]"
 
 	return "Unknown"
 
-/proc/erosia_register_consensual_pair(mob/living/carbon/human/A, mob/living/carbon/human/B)
+/proc/eora_register_consensual_pair(mob/living/carbon/human/A, mob/living/carbon/human/B)
 	if(!A || !B) return
 	if(!A.client || !B.client) return
 	if(A == B) return
 
-	var/idA = erosia_get_round_id(A)
-	var/idB = erosia_get_round_id(B)
+	var/idA = eora_get_round_id(A)
+	var/idB = eora_get_round_id(B)
 	if(!idA || !idB) return
 
-	if(!EROSIA_PARTNERS_BY_ID[idA]) EROSIA_PARTNERS_BY_ID[idA] = list()
-	if(!EROSIA_PARTNERS_BY_ID[idB]) EROSIA_PARTNERS_BY_ID[idB] = list()
+	if(!EORA_PARTNERS_BY_ID[idA]) EORA_PARTNERS_BY_ID[idA] = list()
+	if(!EORA_PARTNERS_BY_ID[idB]) EORA_PARTNERS_BY_ID[idB] = list()
 
-	var/list/LA = EROSIA_PARTNERS_BY_ID[idA]
-	var/list/LB = EROSIA_PARTNERS_BY_ID[idB]
+	var/list/LA = EORA_PARTNERS_BY_ID[idA]
+	var/list/LB = EORA_PARTNERS_BY_ID[idB]
 
 	LA[idB] = TRUE
 	LB[idA] = TRUE
 
-	erosia_update_name(A)
-	erosia_update_name(B)
+	eora_update_name(A)
+	eora_update_name(B)
 
-/proc/erosia_get_partner_count(mob/living/carbon/human/H)
+/proc/eora_get_partner_count(mob/living/carbon/human/H)
 	if(!H || !H.client) return 0
-	var/id = erosia_get_round_id(H)
+	var/id = eora_get_round_id(H)
 	if(!id) return 0
-	var/list/L = EROSIA_PARTNERS_BY_ID[id]
+	var/list/L = EORA_PARTNERS_BY_ID[id]
 	if(!islist(L)) return 0
 	var/c = 0
 	for(var/_ in L) c++
 	return c
 
-/proc/erosia_get_partner_names(mob/living/carbon/human/H)
+/proc/eora_get_partner_names(mob/living/carbon/human/H)
 	var/list/names = list()
 	if(!H || !H.client) return names
-	var/id = erosia_get_round_id(H)
+	var/id = eora_get_round_id(H)
 	if(!id) return names
 
-	var/list/L = EROSIA_PARTNERS_BY_ID[id]
+	var/list/L = EORA_PARTNERS_BY_ID[id]
 	if(!islist(L)) return names
 
 	for(var/pid in L)
-		var/n = erosia_lookup_name_by_id(pid)
+		var/n = eora_lookup_name_by_id(pid)
 		if(n && !names.Find(n))
 			names += n
 
