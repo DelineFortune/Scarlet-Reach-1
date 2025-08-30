@@ -25,7 +25,7 @@ Malum's tool
 - A universal hammer-tool that can do everything. Blacksmiths will kill you for this.
 */
 
-/obj/item/rogueweapon/hammer/malum
+/obj/item/rogueweapon/hammer/artefact/malum
 	force = 21
 	possible_item_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/forge,  /datum/intent/smelt)
 	name = "Malum's tool"
@@ -79,7 +79,7 @@ proc/_malum_recipe_requires_extras(datum/anvil_recipe/R)
 	if(islist(ai) && length(ai) > 0) return TRUE
 	return FALSE
 
-/obj/item/rogueweapon/hammer/malum/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/rogueweapon/hammer/artefact/malum/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	. = ..()
 	if(!proximity_flag || !user || !user.used_intent)
 		return
@@ -169,7 +169,7 @@ proc/_malum_recipe_requires_extras(datum/anvil_recipe/R)
 
 // CRAFT STARTTS HERE //
 
-/obj/item/rogueweapon/hammer/malum/proc/forge_open_category_menu(mob/user, obj/item/ingot/ing)
+/obj/item/rogueweapon/hammer/artefact/malum/proc/forge_open_category_menu(mob/user, obj/item/ingot/ing)
 	var/list/by_cat = list(
 		"Armor"     = list(),
 		"Weapons"   = list(),
@@ -231,7 +231,7 @@ proc/_malum_recipe_requires_extras(datum/anvil_recipe/R)
 	popup.set_content(contents)
 	popup.open()
 
-/obj/item/rogueweapon/hammer/malum/proc/forge_do_craft(mob/user, obj/item/ingot/ing, rec_type)
+/obj/item/rogueweapon/hammer/artefact/malum/proc/forge_do_craft(mob/user, obj/item/ingot/ing, rec_type)
 	if(!istype(ing) || QDELETED(ing))
 		to_chat(user, span_warning("Where did the ingot go?"))
 		return
@@ -273,7 +273,7 @@ proc/_malum_recipe_requires_extras(datum/anvil_recipe/R)
 	user.changeNext_move(CLICK_CD_INTENTCAP)
 	qdel(R)
 
-/obj/item/rogueweapon/hammer/malum/Topic(href, href_list)
+/obj/item/rogueweapon/hammer/artefact/malum/Topic(href, href_list)
 	. = ..()
 	if(!usr || !usr.canUseTopic(src, BE_CLOSE))
 		return
@@ -295,7 +295,7 @@ Necra's Censer (by ARefrigerator)
   the morticians with cleaning the town.
 */
 
-obj/item/necra_censer
+obj/item/artefact/necra_censer
 	name = "Necra's censer"
 	desc = "A small bronze censer that expels an otherworldly mist."
 	icon = 'icons/roguetown/items/misc.dmi'
@@ -312,7 +312,7 @@ obj/item/necra_censer
 	grid_width = 32
 	grid_height = 64
 
-/obj/item/necra_censer/attack_self(mob/user)
+obj/item/artefact/necra_censer/attack_self(mob/user)
 	if(do_after(user, 3 SECONDS))
 		playsound(user.loc,  'sound/items/censer_use.ogg', 100)
 		user.visible_message(span_info("[user.name] lifts up their arm and swings the chain on \the [name] around lightly."))
@@ -477,7 +477,7 @@ obj/item/necra_censer
 	playsound(S, 'sound/foley/waterwash (1).ogg', 80, FALSE)
 
 /*==============================
-  Noc's Phylactery (no ckey)
+  Noc's Phylactery 
   - Binds to a target by sampling blood (30s) but honestly its just scan_process
   - Use in hand: shows target & your XYZ + distance
 ==============================*/
@@ -623,17 +623,15 @@ obj/item/necra_censer
 
 
 // --------------------------
-// Artefact: Erosia’s Locket
+// Artefact: Eora's Locket
 // --------------------------
 
 /*========================================
-  Erosia’s Velvet Locket — partner viewer
+  Eora's Velvet Locket — partner viewer
   -----------------------------------------
-  • Use in hand: показать свои число+имена.
-  • Use on target: показать число+имена цели (видит только пользователь).
+  • Use on target: shows their erp tab statisticc 
 ========================================*/
 
-/// Ларец Эрозии: показывает число и имена уникальных партнёров
 /obj/item/artefact/erosia_partner_locket
 	name = "Erosia’s Velvet Locket"
 	desc = "A velvet locket dedicated to Erosia. The heart remembers names of bonds formed this round."
@@ -644,9 +642,8 @@ obj/item/necra_censer
 
 /obj/item/artefact/erosia_partner_locket/examine(mob/user)
 	. = ..()
-	. += "<hr><span class='info'>Use in hand: show your unique partners (names) this round.</span><br>"
-	. += "<span class='info'>Use on a player: show their unique partners (names) — only you see it.</span><br>"
-	. += "<span class='small'>Counts only living players this round. No account data, no logs.</span>"
+	. += "<hr><span class='info'>Use in hand: show your unique partners (names) this week.</span><br>"
+	. += "<span class='info'>Use on a player: show their unique partners (names) they had sex within week.</span><br>"
 
 /obj/item/artefact/erosia_partner_locket/attack_self(mob/user)
 	if(world.time < last_used + 300)
@@ -662,7 +659,7 @@ obj/item/necra_censer
 	var/cnt = erosia_get_partner_count(H)
 	var/list/names = erosia_get_partner_names(H)
 
-	to_chat(user, span_notice("Erosia’s Whisper: You have **[cnt]** unique partner[ cnt==1 ? "" : "s"] this round."))
+	to_chat(user, span_notice("Eora's Whisper: You have **[cnt]** unique partner[ cnt==1 ? "" : "s"] this round."))
 	if(names && names.len)
 		to_chat(user, "<span class='info'>Names:</span>")
 		for(var/N in names)
@@ -692,7 +689,6 @@ obj/item/necra_censer
 	var/cnt = erosia_get_partner_count(H)
 	var/list/names = erosia_get_partner_names(H)
 
-	// Приватно пользователю: счёт и имена цели
 	to_chat(user, span_notice("Erosia’s Whisper: [H.name] has **[cnt]** unique partner[ cnt==1 ? "" : "s"] this round."))
 	if(names && names.len)
 		to_chat(user, "<span class='info'>Names:</span>")
@@ -707,15 +703,13 @@ obj/item/necra_censer
 // Round-local registries
 // --------------------------
 
-// id -> assoc list of partner-ids (TRUE); id = REF(mind) предпочтительно
 var/global/list/EROSIA_PARTNERS_BY_ID = list()
 
-// id -> last known in-game display name (string)
 var/global/list/EROSIA_ID_NAME = list()
 
 
 // --------------------------
-// Helper procs (registry)
+// Helpers procs egistries
 // --------------------------
 
 /proc/erosia_get_round_id(mob/living/carbon/human/H)
@@ -766,7 +760,6 @@ var/global/list/EROSIA_ID_NAME = list()
 	LA[idB] = TRUE
 	LB[idA] = TRUE
 
-	// Запомним имена на случай, если кто-то выйдет из раунда
 	erosia_update_name(A)
 	erosia_update_name(B)
 
