@@ -118,7 +118,7 @@
 	var/result = get_location_accessible(target, location = location, grabs = grabs, skipundies = skipundies)
 	if(result && user == target && !(bodypart in user_controller.using_zones) && user_controller.current_action == SEX_ACTION(src))
 		user_controller.using_zones += location
-	
+
 	return result
 
 /datum/sex_controller/proc/finished_check()
@@ -194,6 +194,10 @@
 	after_ejaculation()
 	if(!oral)
 		after_intimate_climax()
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 /datum/sex_controller/proc/knot_penis_type()
 	var/obj/item/organ/penis/penis = user.getorganslot(ORGAN_SLOT_PENIS)
@@ -589,6 +593,9 @@
 			target.mob_timers["cumtri"] = world.time
 			target.adjust_triumphs(1)
 			to_chat(target, span_love("Our loving is a true TRIUMPH!"))
+
+	if(ishuman(user) && ishuman(target) && user.client && target.client)
+		erosia_register_consensual_pair(user, target)
 
 /datum/sex_controller/proc/just_ejaculated()
 	return (last_ejaculation_time + 2 SECONDS >= world.time)
