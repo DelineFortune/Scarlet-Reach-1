@@ -377,7 +377,7 @@
 	sheathe_sound = 'sound/items/wood_sharpen.ogg'
 
 
-/obj/item/rogueweapon/shovel/getonmobprop(tag)
+/obj/item/rogueweapon/shovel/saperka/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)

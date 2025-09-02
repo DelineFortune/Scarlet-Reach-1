@@ -156,7 +156,7 @@
 
 	user.visible_message(
 		span_notice("[user] kneels and starts rigging something beneath their feet…"),
-		span_notice("I begin setting a [choice] bogtrap. Stay still and keep cover.")
+		span_notice("I begin setting a [choice] bogtrap.")
 	)
 	playsound(user, 'sound/misc/clockloop.ogg', 50, TRUE)
 
