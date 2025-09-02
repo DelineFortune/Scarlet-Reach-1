@@ -267,3 +267,21 @@
 	smoke.effect_type = smoke_type
 	smoke.set_up(range, location)
 	smoke.start()
+
+/////////////////////////////////////////////
+// Poison gas
+/////////////////////////////////////////////
+
+/obj/effect/particle_effect/smoke/poison_gas
+	color = "#369c50"
+	lifetime = 10
+
+/obj/effect/particle_effect/smoke/poison_gas/smoke_mob(mob/living/carbon/M)
+	if(..())
+	
+		M.adjustToxLoss(20, 0)
+		M.emote("cough")
+		return 1
+
+/datum/effect_system/smoke_spread/poison_gas
+	effect_type = /obj/effect/particle_effect/smoke/poison_gas

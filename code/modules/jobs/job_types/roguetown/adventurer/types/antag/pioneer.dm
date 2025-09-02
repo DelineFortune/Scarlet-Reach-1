@@ -43,9 +43,8 @@
 	gloves = /obj/item/clothing/gloves/roguetown/angle/grenzelgloves/blacksmith
 	armor = /obj/item/clothing/suit/roguetown/armor/islandworkingarmor
 	backr = /obj/item/storage/backpack/rogue/backpack/bagpack
-	backl = /obj/item/rogueweapon/pick/steel
-	beltr = /obj/item/rogueweapon/stoneaxe/pioneer //its an axe yes
-	beltl = /obj/item/flashlight/flare/torch/lantern
+	beltl = /obj/item/rogueweapon/pick/steel
+	beltr = /obj/item/flashlight/flare/torch/lantern
 	backpack_contents = list(
 		/obj/item/lockpickring/mundane = 1,
 		/obj/item/flashlight/flare/torch = 1,
@@ -54,7 +53,8 @@
 		/obj/item/rogueore/coal=1,
 		/obj/item/rogueore/iron=1,
 		/obj/item/rogueweapon/hammer/iron = 1,
-		/obj/item/rogueweapon/tongs = 1
+		/obj/item/rogueweapon/tongs = 1,
+		/obj/item/rogueweapon/stoneaxe/pioneer = 1
 	)
 	id = /obj/item/scomstone/mattcoin
 	H.change_stat("strength", 2) // to be sure they can mine/smith without problems

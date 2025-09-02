@@ -201,7 +201,7 @@
 
 /obj/item/rogueweapon/stoneaxe/pioneer
 	force = 40
-	possible_item_intents = list(/datum/intent/axe/cut/battle, /datum/intent/axe/chop/battle, /datum/intent/axe/smash, /datum/intent/shovelscoop)
+	possible_item_intents = list(/datum/intent/axe/cut/battle, /datum/intent/axe/chop/battle, /datum/intent/mace/smash, /datum/intent/shovelscoop)
 	name = "Saperka"
 	desc = "A compact, steel-headed spade favored by Pioneers. Scarred by a hundred fieldworks, its socket is nicked from prying and the edge has been honed to bite through roots-or armor-in a pinch."
 	icon_state = "saperka"
