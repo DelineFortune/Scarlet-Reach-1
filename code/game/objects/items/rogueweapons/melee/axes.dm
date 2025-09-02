@@ -199,6 +199,27 @@
 				return list("shrink" = 0.5,"sx" = 1,"sy" = -1,"nx" = 1,"ny" = -1,"wx" = 4,"wy" = -1,"ex" = -1,"ey" = -1,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 8,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0,)
 
 
+/obj/item/rogueweapon/stoneaxe/pioneer
+	force = 40
+	possible_item_intents = list(/datum/intent/axe/cut/battle, /datum/intent/axe/chop/battle, /datum/intent/axe/smash, /datum/intent/shovelscoop)
+	name = "Saperka"
+	desc = "A compact, steel-headed spade favored by Pioneers. Scarred by a hundred fieldworks, its socket is nicked from prying and the edge has been honed to bite through roots-or armor-in a pinch."
+	icon_state = "saperka"
+	icon = 'icons/roguetown/weapons/32.dmi'
+	max_blade_int = 500
+	dropshrink = 0.75
+	wlength = WLENGTH_LONG
+	slot_flags = ITEM_SLOT_BACK
+	pixel_y = -16
+	pixel_x = -16
+	inhand_x_dimension = 64
+	inhand_y_dimension = 64
+	bigboy = TRUE
+	gripsprite = TRUE
+	smeltresult = /obj/item/ingot/steel
+	minstr = 12
+	wdefense = 5
+
 
 /obj/item/rogueweapon/stoneaxe/woodcut
 	name = "axe"

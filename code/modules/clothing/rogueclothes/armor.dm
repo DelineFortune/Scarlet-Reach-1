@@ -1607,3 +1607,25 @@
 	GLOB.lordcolor -= src
 	return..()
 	
+/obj/item/clothing/suit/roguetown/armor/islandworkingarmor
+	name = "Islander's trench coat"
+	desc = "A long, oil-treated trench coat issued to workers stationed across the soaked archipelagos. Its high collar, dense fabric, and water-resistant lining shield the wearer from the island rain and sea-born damp. Meant to endure storms as much as silence, it’s a garment built for vigilance in a land where rot creeps in with the tide."
+	icon_state = "workingarmor"
+	item_state = "workingarmor"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
+	break_sound = 'sound/foley/cloth_rip.ogg'
+	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	body_parts_covered = COVERAGE_FULL
+	armor = list("blunt" = 50, "slash" = 50, "stab" = 50, "piercing" = 10, "fire" = 30, "acid" = 0) // you can just pick it
+	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_SMASH)
+	blocksound = SOFTHIT
+	blade_dulling = DULLING_BASHCHOP
+	sewrepair = TRUE
+	nodismemsleeves = TRUE
+	max_integrity = 300 //militrary issue armor, supposed to withstand a lot of abuse
+	sellprice = 20
+	armor_class = ARMOR_CLASS_LIGHT
+	allowed_race = NON_DWARVEN_RACE_TYPES
+	flags_inv = HIDEBOOB|HIDECROTCH
+	grid_height = 64
+	grid_width = 64
