@@ -551,20 +551,20 @@
 
 /obj/structure/trap/bogtrap/freeze/trap_effect(mob/living/L)
     to_chat(L, span_danger("<B>You're frozen solid!</B>"))
-    L.Paralyze(40)
+    L.Paralyze(50)
     L.adjust_bodytemperature(-300)
-    L.apply_status_effect(/datum/status_effect/freon)
     playsound(src, 'sound/misc/explode/bottlebomb (1).ogg', 60, TRUE)
 
 
 /obj/structure/trap/bogtrap/bomb
-    name = "trapbog (blast)"
-    checks_antimagic = FALSE
+	name = "trapbog (blast)"
+	checks_antimagic = FALSE
 
 /obj/structure/trap/bogtrap/bomb/trap_effect(mob/living/L)
-    to_chat(L, span_danger("<B>A buried charge detonates!</B>"))
-    explosion(L, high_impact_range = 1, light_impact_range = 2, flame_range = 2)
-    playsound(src,'sound/misc/explode/bottlebomb (1).ogg', 200, TRUE)
+	to_chat(L, span_danger("<B>A buried charge detonates!</B>"))
+	var/turf/T = get_turf(src)
+	explosion(T, high_impact_range = 1, light_impact_range = 2, flame_range = 2)
+	playsound(src, 'sound/misc/explode/bottlebomb (1).ogg', 200, TRUE)
 
 //kneestingers
 
@@ -572,35 +572,18 @@
 	name = "trapbog (kneestingers)"
 	desc = "A hidden charge that bursts into a patch of kneestingers."
 	charges = 1
-	var/summon_count = 3
-	var/radius = 1
 
 /obj/structure/trap/bogtrap/kneestingers/trap_effect(mob/living/L)
 	var/turf/center = get_turf(src)
 	to_chat(L, span_danger("<B>Something skitters out from the ground!</B>"))
 	playsound(src, 'sound/items/beartrap.ogg', 200, TRUE)
 
-	var/list/spots = list(center)
-	for(var/dir in list(NORTH,SOUTH,EAST,WEST,NORTHEAST,NORTHWEST,SOUTHEAST,SOUTHWEST))
-		var/turf/T = get_step(center, dir)
-		if(T) spots += T
-
-	if(radius > 1)
-		for(var/turf/T2 in view(radius, center))
-			if(!(T2 in spots))
-				spots += T2
-
-	var/placed = 0
-	for(var/turf/T in spots)
-		if(placed >= summon_count)
-			break
-		if(!T || isclosedturf(T))
-			continue
-		new /obj/structure/glowshroom(T)
-		placed++
-
-	if(placed == 0 && center && !isclosedturf(center))
-		new /obj/structure/glowshroom(center)
+	for(var/dx in -1 to 1)
+		for(var/dy in -1 to 1)
+			var/turf/T = locate(center.x + dx, center.y + dy, center.z)
+			if(!T || isclosedturf(T))
+				continue
+			new /obj/structure/glowshroom(T)
 
  //Poison tr*p
 
@@ -610,6 +593,6 @@
 
 /obj/structure/trap/bogtrap/poison/trap_effect(mob/living/L)
 	to_chat(L, span_danger("<B>A noxious cloud engulfs you!</B>"))
-	L.Paralyze(20)
+	L.Paralyze(30)
 	new /obj/effect/particle_effect/smoke/poison_gas(get_turf(src))
 	playsound(src, 'sound/items/beartrap.ogg', 200, TRUE)
