@@ -435,6 +435,7 @@
 	max_integrity = 100
 	trap_damage = 50
 	alpha = 60
+	charges = 1 //feel free to add more than 1 use
 
 	var/tmp/list/personal_reveal_images = list()
 	var/bandit_reveal_alpha = 140
@@ -444,11 +445,8 @@
 	alpha = 200
 	last_trigger = world.time
 	charges--
-	if(charges <= 0)
-		animate(src, alpha = 0, time = 2)
-		QDEL_IN(src, 2)
-	else
-		animate(src, alpha = initial(alpha), time = time_between_triggers)
+	animate(src, alpha = 0, time = 2)
+	QDEL_IN(src, 2)
 
 /obj/structure/trap/bogtrap/Destroy()
 	if(personal_reveal_images)
@@ -502,7 +500,10 @@
 		return FALSE
 	var/assigned = lowertext("[H.mind.assigned_role]")
 	var/special  = lowertext("[H.mind.special_role]")
-	return (assigned == "bandit" || special == "bandit" || assigned == "bogguard")
+
+	return (assigned == "bandit" || special == "bandit" \
+		|| assigned == "bogguard" \
+		|| assigned == "warden" || special == "warden")
 
 /obj/structure/trap/bogtrap/proc/show_personal_reveal(mob/user)
 	if(!user || !user.client)
@@ -527,7 +528,6 @@
 		personal_reveal_images[user.client] = null
 
 /obj/structure/trap/bogtrap/examine(mob/user)
-	. = ..()
 	if(!isliving(user) || !armed)
 		return
 	var/mob/living/L = user
@@ -563,7 +563,7 @@
 /obj/structure/trap/bogtrap/bomb/trap_effect(mob/living/L)
 	to_chat(L, span_danger("<B>A buried charge detonates!</B>"))
 	var/turf/T = get_turf(src)
-	explosion(T, high_impact_range = 1, light_impact_range = 2, flame_range = 2)
+	explosion(T, high_impact_range = 1, light_impact_range = 2, flame_range = 2) // взрыв на турфе
 	playsound(src, 'sound/misc/explode/bottlebomb (1).ogg', 200, TRUE)
 
 //kneestingers
