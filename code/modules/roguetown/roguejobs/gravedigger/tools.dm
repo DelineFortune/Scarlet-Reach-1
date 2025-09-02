@@ -343,3 +343,35 @@
 		var/obj/item/bodybag/B = foldedbag_instance || new foldedbag_path
 		usr.put_in_hands(B)
 		qdel(src)
+
+/obj/item/rogueweapon/shovel/saperka
+	force = 40
+	force_wielded = 50
+	possible_item_intents = list(/datum/intent/axe/cut/battle, /datum/intent/axe/chop/battle, /datum/intent/mace/smash, /datum/intent/shovelscoop)
+	name = "Saperka"
+	desc = "A compact, steel-headed spade favored by pioneers. Scarred by a hundred fieldworks, its socket is nicked from prying and the edge has been honed to bite through roots-or armor-in a pinch."
+	icon_state = "saperka"
+	icon = 'icons/roguetown/weapons/32.dmi'
+	max_blade_int = 300
+	dropshrink = 0.75
+	wlength = WLENGTH_SHORT
+	gripped_intents = null
+	wlength = WLENGTH_SHORT
+	slot_flags = ITEM_SLOT_HIP | ITEM_SLOT_BACK
+	w_class = WEIGHT_CLASS_NORMAL
+	sharpness = 100
+	pixel_y = -16
+	pixel_x = -16
+	inhand_x_dimension = 64
+	inhand_y_dimension = 64
+	smeltresult = /obj/item/ingot/steel
+	minstr = 12
+	wdefense = 5
+	swingsound = BLADEWOOSH_MED
+	associated_skill = /datum/skill/combat/axes
+	demolition_mod = 2 // breaks things fast
+	resistance_flags = FLAMMABLE
+	blade_dulling = DULLING_SHAFT_WOOD
+	gripped_intents = list(/datum/intent/axe/cut/battle, /datum/intent/axe/chop/battle, /datum/intent/mace/smash)
+	pickup_sound = 'modular_helmsguard/sound/sheath_sounds/draw_polearm.ogg'
+	sheathe_sound = 'sound/items/wood_sharpen.ogg'

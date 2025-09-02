@@ -429,15 +429,26 @@
 	name = "trapbog"
 	desc = "A cleverly concealed device with a nasty surprise."
 	icon = 'icons/roguetown/items/misc.dmi'
+	icon_state = "beartrap"
 	name = "mantrap"
-	time_between_triggers = 100
-	max_integrity = 500
+	time_between_triggers = 100 //feel free to add more than 1 use
+	max_integrity = 100
 	trap_damage = 50
 	alpha = 60
 
 	var/tmp/list/personal_reveal_images = list()
-	var/bandit_reveal_alpha = 140  
-	var/others_reveal_alpha = 35  
+	var/bandit_reveal_alpha = 140
+	var/others_reveal_alpha = 35
+
+/obj/structure/trap/bogtrap/flare()
+	alpha = 200
+	last_trigger = world.time
+	charges--
+	if(charges <= 0)
+		animate(src, alpha = 0, time = 2)
+		QDEL_IN(src, 2)
+	else
+		animate(src, alpha = initial(alpha), time = time_between_triggers)
 
 /obj/structure/trap/bogtrap/Destroy()
 	if(personal_reveal_images)
@@ -474,6 +485,8 @@
 	if(HAS_TRAIT(H, TRAIT_MEDIUMARMOR)) return TRUE
 	if(HAS_TRAIT(H, TRAIT_HEAVYARMOR))  return TRUE
 	if(HAS_TRAIT(H, TRAIT_DODGEEXPERT)) return TRUE
+	if(HAS_TRAIT(H, TRAIT_CRITICAL_RESISTANCE)) return TRUE
+
 	return FALSE
 
 /obj/structure/trap/bogtrap/proc/is_trap_exception(mob/living/H)
@@ -521,8 +534,8 @@
 	if(user.mind && (user.mind in immune_minds))
 		return
 	if(get_dist(user, src) <= FLOOR((L.STAPER-4)/4,1))
-		to_chat(user, span_notice("I spot \\the [src]."))
-		show_personal_reveal(user) 
+		to_chat(user, span_notice("I spot the [src]."))
+		show_personal_reveal(user)
 
 
 /obj/structure/trap/bogtrap/Crossed(atom/movable/AM)
@@ -530,39 +543,39 @@
 		var/mob/living/H = AM
 		if(is_trap_exception(H))
 			return
-	. = ..() 
-
-//freeze
+	. = ..()
 
 /obj/structure/trap/bogtrap/freeze
-	name = "trapbog (frost)"
-	charges = 1
+    name = "trapbog (frost)"
+    checks_antimagic = FALSE
 
 /obj/structure/trap/bogtrap/freeze/trap_effect(mob/living/L)
-	to_chat(L, span_danger("<B>You're frozen solid!</B>"))
-	L.Paralyze(40)
-	L.adjust_bodytemperature(-300)
-	L.apply_status_effect(/datum/status_effect/freon)
-	playsound(src, 'sound/items/beartrap.ogg', 200, TRUE)
+    to_chat(L, span_danger("<B>You're frozen solid!</B>"))
+    L.Paralyze(40)
+    L.adjust_bodytemperature(-300)
+    L.apply_status_effect(/datum/status_effect/freon)
+    playsound(src, 'sound/misc/explode/bottlebomb (1).ogg', 60, TRUE)
+
 
 /obj/structure/trap/bogtrap/bomb
-	name = "trapbog (blast)"
-	charges = 1
+    name = "trapbog (blast)"
+    checks_antimagic = FALSE
 
 /obj/structure/trap/bogtrap/bomb/trap_effect(mob/living/L)
-	..()
-	explosion(src, high_impact_range = 1, light_impact_range = 2, flame_range = 2, smoke = TRUE, soundin = pick('sound/misc/explode/bottlebomb (1).ogg','sound/misc/explode/bottlebomb (2).ogg'))
+    to_chat(L, span_danger("<B>A buried charge detonates!</B>"))
+    explosion(L, high_impact_range = 1, light_impact_range = 2, flame_range = 2)
+    playsound(src,'sound/misc/explode/bottlebomb (1).ogg', 200, TRUE)
 
 //kneestingers
 
-/obj/structure/trap/trapbog/kneestingers
+/obj/structure/trap/bogtrap/kneestingers
 	name = "trapbog (kneestingers)"
 	desc = "A hidden charge that bursts into a patch of kneestingers."
 	charges = 1
 	var/summon_count = 3
 	var/radius = 1
 
-/obj/structure/trap/trapbog/kneestingers/trap_effect(mob/living/L)
+/obj/structure/trap/bogtrap/kneestingers/trap_effect(mob/living/L)
 	var/turf/center = get_turf(src)
 	to_chat(L, span_danger("<B>Something skitters out from the ground!</B>"))
 	playsound(src, 'sound/items/beartrap.ogg', 200, TRUE)
@@ -590,6 +603,7 @@
 		new /obj/structure/glowshroom(center)
 
  //Poison tr*p
+
 /obj/structure/trap/bogtrap/poison
 	name = "trapbog (toxic)"
 	charges = 1
