@@ -158,7 +158,7 @@
 		span_notice("[user] kneels and starts rigging something beneath their feet…"),
 		span_notice("I begin setting a [choice] bogtrap. Stay still and keep cover.")
 	)
-	playsound(user, 'sound/items/ratchet.ogg', 40, TRUE)
+	playsound(user, 'sound/misc/clockloop.ogg', 50, TRUE)
 
 	if(!do_after(user, setup_delay, target = T))
 		pending = FALSE
@@ -173,7 +173,7 @@
 		span_warning("A hidden mechanism clicks into place under [user]!"),
 		span_notice("The [choice] bogtrap arms beneath my feet.")
 	)
-	playsound(T, 'sound/machines/click.ogg', 50, TRUE)
+	playsound(T, 'sound/misc/chains.ogg', 50, TRUE)
 
 	pending = FALSE
 	return TRUE
