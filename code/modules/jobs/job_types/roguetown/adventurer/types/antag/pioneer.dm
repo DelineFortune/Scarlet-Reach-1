@@ -36,7 +36,7 @@
 	belt =	/obj/item/storage/belt/rogue/leather
 	head = /obj/item/clothing/head/roguetown/helmet/kettle
 	pants = /obj/item/clothing/under/roguetown/trou/leather
-	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/random
+	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/councillor //gambeson but black
 	shoes = /obj/item/clothing/shoes/roguetown/boots/armor //toe safety first
 	mask = /obj/item/clothing/mask/rogue/facemask/steel
 	neck = /obj/item/clothing/neck/roguetown/coif
@@ -59,10 +59,10 @@
 	id = /obj/item/scomstone/mattcoin
 	H.change_stat("strength", 3) // to be sure they can mine/smith without problems their hammer asks for 12 str // use armor get peel-ed idiot
 	H.change_stat("endurance", 2) // no speed get peel-ed, idiot
+	H.change_stat("constitution", 2) // no speed to dodge no armor block
 	H.change_stat("perception", 2)
 	H.change_stat("intelligence", 4)
 	H.change_stat("fortune", 2)
-	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC) //no con
 	H.AddSpell(new /obj/effect/proc_holder/spell/targeted/pioneer/plant_bogtrap_delayed)
 
 // Their snowflake mine//
@@ -87,9 +87,9 @@
 	name = "Set Bogtrap (Delayed)"
 	desc = "Arm a bogtrap beneath your feet after careful preparation."
 	range = 0
-	overlay_state = "trap"
+	overlay_state = "deploytrap"
 	releasedrain = 0
-	recharge_time = 90 SECONDS
+	recharge_time = 5 SECONDS
 	max_targets = 0
 	cast_without_targets = TRUE
 	antimagic_allowed = TRUE
@@ -98,7 +98,7 @@
 	invocation_type = "whisper"
 	miracle = FALSE
 	devotion_cost = 0
-	var/setup_delay = 60 SECONDS
+	var/setup_delay = 5 SECONDS
 	var/pending = FALSE
 	var/trap_path = /obj/structure/trap/bogtrap/bomb
 
