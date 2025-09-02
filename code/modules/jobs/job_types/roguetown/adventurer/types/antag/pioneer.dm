@@ -89,7 +89,7 @@
 	range = 0
 	overlay_state = "deploytrap"
 	releasedrain = 0
-	recharge_time = 5 SECONDS
+	recharge_time = 90 SECONDS
 	max_targets = 0
 	cast_without_targets = TRUE
 	antimagic_allowed = TRUE
@@ -98,7 +98,7 @@
 	invocation_type = "whisper"
 	miracle = FALSE
 	devotion_cost = 0
-	var/setup_delay = 5 SECONDS
+	var/setup_delay = 30 SECONDS
 	var/pending = FALSE
 	var/trap_path = /obj/structure/trap/bogtrap/bomb
 
@@ -119,6 +119,11 @@
 	B.alpha = 100
 	B.update_icon()
 
+/obj/effect/proc_holder/spell/targeted/pioneer/plant_bogtrap_delayed/proc/_is_town_blocked(turf/T)
+	if(!T) return TRUE
+	var/area/A = get_area(T)
+	return istype(A, /area/rogue/outdoors/town	
+
 /obj/effect/proc_holder/spell/targeted/pioneer/plant_bogtrap_delayed/cast(list/targets, mob/living/user = usr)
 	. = ..()
 	if(!isliving(user))
@@ -135,6 +140,11 @@
 
 	var/turf/T = get_turf(user)
 	if(!T || !isturf(T))
+		revert_cast()
+		return FALSE
+
+	if(_is_town_blocked(T))
+		to_chat(user, span_warning("I cannot set a bogtrap here; the ground is too hard."))
 		revert_cast()
 		return FALSE
 

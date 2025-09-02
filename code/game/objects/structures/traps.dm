@@ -563,7 +563,7 @@
 /obj/structure/trap/bogtrap/bomb/trap_effect(mob/living/L)
 	to_chat(L, span_danger("<B>A buried charge detonates!</B>"))
 	var/turf/T = get_turf(src)
-	explosion(T, 0, 1, 3, 0) 
+	explosion(src, light_impact_range = 1, flame_range = 3, smoke = TRUE)
 	playsound(src, 'sound/misc/explode/bottlebomb (1).ogg', 200, TRUE)
 
 //kneestingers

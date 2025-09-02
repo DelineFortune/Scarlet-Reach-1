@@ -353,17 +353,12 @@
 	icon_state = "saperka"
 	icon = 'icons/roguetown/weapons/32.dmi'
 	max_blade_int = 300
-	dropshrink = 0.75
 	wlength = WLENGTH_SHORT
 	gripped_intents = null
 	wlength = WLENGTH_SHORT
 	slot_flags = ITEM_SLOT_HIP | ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_NORMAL
 	sharpness = 100
-	pixel_y = -16
-	pixel_x = -16
-	inhand_x_dimension = 64
-	inhand_y_dimension = 64
 	smeltresult = /obj/item/ingot/steel
 	minstr = 12
 	wdefense = 5
