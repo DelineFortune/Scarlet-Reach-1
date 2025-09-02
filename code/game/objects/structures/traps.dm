@@ -15,7 +15,7 @@
 	var/trap_damage = 50 // baseline trap damage, reduced by armor checks. Wear your PPE in dungeons
 	var/def_zone = BODY_ZONE_CHEST //
 	var/used_time = 14 // interaction time for disabling traps, scales down with trap skill
- 
+
 
 	var/list/static/ignore_typecache
 	var/list/mob/immune_minds = list() //unused and a bit weird, helpful for making mobs immune to the traps without TRAIT_LIGHT_STEP
@@ -437,13 +437,14 @@
 
 	var/tmp/list/personal_reveal_images = list()
 	var/bandit_reveal_alpha = 140  
-	var/others_reveal_alpha = 35   
+	var/others_reveal_alpha = 35  
 
 /obj/structure/trap/bogtrap/Destroy()
 	if(personal_reveal_images)
 		for(var/client/C in personal_reveal_images)
 			var/image/I = personal_reveal_images[C]
-			if(C && I) C.images -= I
+			if(C && I)
+				C.images -= I
 	personal_reveal_images = null
 	. = ..()
 
@@ -468,26 +469,41 @@
 
 	return FALSE
 
-/obj/structure/trap/bogtrap/proc/is_trap_exception(mob/living/H)
+/obj/structure/trap/bogtrap/proc/has_required_trigger_trait(mob/living/H)
 	if(!H) return FALSE
-	if(is_bandit_antag(H)) return TRUE
 	if(HAS_TRAIT(H, TRAIT_MEDIUMARMOR)) return TRUE
 	if(HAS_TRAIT(H, TRAIT_HEAVYARMOR))  return TRUE
 	if(HAS_TRAIT(H, TRAIT_DODGEEXPERT)) return TRUE
 	return FALSE
 
+/obj/structure/trap/bogtrap/proc/is_trap_exception(mob/living/H)
+	if(!H) return FALSE
+	if(has_exempt_role(H))
+		return TRUE
+	if(!has_required_trigger_trait(H))
+		return TRUE
+	return FALSE
+
+/obj/structure/trap/bogtrap/proc/is_exempt_viewer(mob/living/H)
+	if(!H || !H.mind)
+		return FALSE
+	var/assigned = lowertext("[H.mind.assigned_role]")
+	var/special  = lowertext("[H.mind.special_role]")
+	return (assigned == "bandit" || special == "bandit" || assigned == "bogguard")
 
 /obj/structure/trap/bogtrap/proc/show_personal_reveal(mob/user)
-	if(!user || !user.client) return
+	if(!user || !user.client)
+		return
 	var/image/I = image(icon = src.icon, loc = src, icon_state = src.icon_state)
 	I.layer = src.layer
 	I.plane = src.plane
 	I.appearance_flags = src.appearance_flags
 	I.color = src.color
 	I.transform = src.transform
-	I.alpha = is_bandit_antag(user) ? bandit_reveal_alpha : others_reveal_alpha
+	I.alpha = is_exempt_viewer(user) ? bandit_reveal_alpha : others_reveal_alpha
 	user.client.images += I
-	if(!personal_reveal_images) personal_reveal_images = list()
+	if(!personal_reveal_images)
+		personal_reveal_images = list()
 	personal_reveal_images[user.client] = I
 	addtimer(CALLBACK(src, PROC_REF(hide_personal_reveal), user), 3 SECONDS)
 
@@ -499,9 +515,11 @@
 
 /obj/structure/trap/bogtrap/examine(mob/user)
 	. = ..()
-	if(!isliving(user) || !armed) return
+	if(!isliving(user) || !armed)
+		return
 	var/mob/living/L = user
-	if(user.mind && (user.mind in immune_minds)) return
+	if(user.mind && (user.mind in immune_minds))
+		return
 	if(get_dist(user, src) <= FLOOR((L.STAPER-4)/4,1))
 		to_chat(user, span_notice("I spot \\the [src]."))
 		show_personal_reveal(user) 
@@ -512,9 +530,9 @@
 		var/mob/living/H = AM
 		if(is_trap_exception(H))
 			return
-	. = ..()
+	. = ..() 
 
-//freeze 
+//freeze
 
 /obj/structure/trap/bogtrap/freeze
 	name = "trapbog (frost)"
@@ -525,14 +543,14 @@
 	L.Paralyze(40)
 	L.adjust_bodytemperature(-300)
 	L.apply_status_effect(/datum/status_effect/freon)
-	playsound(src, 'sound/magic/magic_cold.ogg', 60, TRUE)
+	playsound(src, 'sound/items/beartrap.ogg', 200, TRUE)
 
 /obj/structure/trap/bogtrap/bomb
 	name = "trapbog (blast)"
 	charges = 1
 
 /obj/structure/trap/bogtrap/bomb/trap_effect(mob/living/L)
-	..() /
+	..()
 	explosion(src, high_impact_range = 1, light_impact_range = 2, flame_range = 2, smoke = TRUE, soundin = pick('sound/misc/explode/bottlebomb (1).ogg','sound/misc/explode/bottlebomb (2).ogg'))
 
 //kneestingers
@@ -541,13 +559,13 @@
 	name = "trapbog (kneestingers)"
 	desc = "A hidden charge that bursts into a patch of kneestingers."
 	charges = 1
-	var/summon_count = 3   
-	var/radius = 1         
+	var/summon_count = 3
+	var/radius = 1
 
 /obj/structure/trap/trapbog/kneestingers/trap_effect(mob/living/L)
 	var/turf/center = get_turf(src)
 	to_chat(L, span_danger("<B>Something skitters out from the ground!</B>"))
-	playsound(src, 'sound/creatures/bug_skitter.ogg', 60, TRUE)
+	playsound(src, 'sound/items/beartrap.ogg', 200, TRUE)
 
 	var/list/spots = list(center)
 	for(var/dir in list(NORTH,SOUTH,EAST,WEST,NORTHEAST,NORTHWEST,SOUTHEAST,SOUTHWEST))
@@ -571,7 +589,7 @@
 	if(placed == 0 && center && !isclosedturf(center))
 		new /obj/structure/glowshroom(center)
 
- //Poison tr*p 
+ //Poison tr*p
 /obj/structure/trap/bogtrap/poison
 	name = "trapbog (toxic)"
 	charges = 1
@@ -580,4 +598,4 @@
 	to_chat(L, span_danger("<B>A noxious cloud engulfs you!</B>"))
 	L.Paralyze(20)
 	new /obj/effect/particle_effect/smoke/poison_gas(get_turf(src))
-	playsound(src, 'sound/foley/gas_release.ogg', 60, TRUE)
+	playsound(src, 'sound/items/beartrap.ogg', 200, TRUE)

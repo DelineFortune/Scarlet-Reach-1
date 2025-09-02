@@ -42,7 +42,8 @@
 	neck = /obj/item/clothing/neck/roguetown/coif
 	gloves = /obj/item/clothing/gloves/roguetown/angle/grenzelgloves/blacksmith
 	armor = /obj/item/clothing/suit/roguetown/armor/islandworkingarmor
-	backr = /obj/item/storage/backpack/rogue/backpack/bagpack
+	backl = /obj/item/rogueweapon/stoneaxe/pioneer //40 force +1.5 dmg SMASH but SLOW. If your enemy is a mental retard and stays on one place you delete them 
+	backr = /obj/item/storage/backpack/rogue/backpack/
 	beltl = /obj/item/rogueweapon/pick/steel
 	beltr = /obj/item/flashlight/flare/torch/lantern
 	backpack_contents = list(
@@ -53,15 +54,13 @@
 		/obj/item/rogueore/coal=1,
 		/obj/item/rogueore/iron=1,
 		/obj/item/rogueweapon/hammer/iron = 1,
-		/obj/item/rogueweapon/tongs = 1,
-		/obj/item/rogueweapon/stoneaxe/pioneer = 1
+		/obj/item/rogueweapon/tongs = 1
 	)
 	id = /obj/item/scomstone/mattcoin
-	H.change_stat("strength", 2) // to be sure they can mine/smith without problems
-	H.change_stat("constitution", 1) // use armor get peel-ed idiot
+	H.change_stat("strength", 3 // to be sure they can mine/smith without problems their hammer asks for 12 str // use armor get peel-ed idiot
 	H.change_stat("endurance", 2) // no speed get peel-ed, idiot
-	H.change_stat("perception", 2)
+	H.change_stat("perception", 2) 
 	H.change_stat("intelligence", 4)
 	H.change_stat("fortune", 2)
-	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC) //no con
 
