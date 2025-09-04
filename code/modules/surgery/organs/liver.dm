@@ -118,7 +118,8 @@
 /obj/item/organ/liver/t2
 	name = "blessed liver"
 	icon_state = "liver"
-	desc = "A liver that has received a blessing. A rare privilege granted only to Her followers."
+	desc = "Bestowed only upon her most faithful, a rare sign of her favor. Its vigor shields against poison and corruption, yet within its fervent beat lingers a whisper that what is called blessing may be no more than heresy renamed. Many bore it on crusade and pilgrimage, trusting the blessing to outlast the Rot."
+	maxHealth = 1.5 * STANDARD_ORGAN_THRESHOLD
 	toxTolerance = 35 //can shrug off up to 35u of toxins
 	toxLethality = 0.008 //-20% toxin dmg from sources
 	sellprice = 200
@@ -127,7 +128,7 @@
 /obj/item/organ/liver/t3
 	name = "corrupted liver"
 	icon_state = "liver"
-	desc = "A cursed, perverted artifact. It can serve you well—what sacrifice are you willing to offer to survive?"
+	desc = "Once a token of faith, now a relic of decay. Its strength is undeniable, yet it bears the curse of excess: a body hardened against venom, but forever drowning in the bitterness it was meant to resist. Too perfect for any mortal frame, it is heresy itself, for within it smolders a spark of forbidden divinity."
 	alcohol_tolerance = 0.001
 	maxHealth = 2 * STANDARD_ORGAN_THRESHOLD
 	toxTolerance = 50 //ignore up to 50 tox
@@ -152,6 +153,9 @@
 	if(M.has_status_effect(/datum/status_effect/buff/t1liver))
 		M.remove_status_effect(/datum/status_effect/buff/t1liver)
 
+/datum/status_effect/buff/t1liver/tick()
+    owner.adjustToxLoss(-3)		
+
 /datum/status_effect/buff/t2liver
 	id = "t2liver"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/t2liver
@@ -159,9 +163,9 @@
 /atom/movable/screen/alert/status_effect/buff/t2liver
 	name = "Blessed liver"
 	desc = "Blessed organ, by Pestra..."
-
+а
 /datum/status_effect/buff/t2liver/tick()
-    owner.adjustToxLoss(-0.3)
+    owner.adjustToxLoss(-5)
 
 /obj/item/organ/liver/t2/Insert(mob/living/carbon/M)
 	..()
@@ -180,7 +184,7 @@
 	desc = "The cursed thing is inside me now."
 
 /datum/status_effect/buff/t3liver/tick()
-    owner.adjustToxLoss(-1)
+    owner.adjustToxLoss(-7)
 
 /obj/item/organ/liver/t3/Insert(mob/living/carbon/M)
 	..()

@@ -50,19 +50,19 @@
 /obj/item/organ/lungs/t1
 	name = "completed lungs"
 	icon_state = "lungs"
-	desc = "The perfect art, it feels... Completed."
+	desc = "Immaculate vessels of breath, crafted with precision beyond mortal means. Each inhale feels endless, as if the very sky itself had been pressed into flesh."
 	sellprice = 100
 
 /obj/item/organ/lungs/t2
 	name = "blessed lungs"
 	icon_state = "lungs"
-	desc = "They accepted this heresy to defeat a greater heresy. They call it a blessing, but we all know it’s not…"
+	desc = "Bestowed upon those who swore to inhale even the poisoned winds in Her name. Their breath flows with unnatural vigor, though each exhale whispers of debt unpaid."
 	sellprice = 200
 
 /obj/item/organ/lungs/t3
 	name = "corrupted lungs"
 	icon_state = "lungs"
-	desc = "A cursed, perverted artifact. It can serve you well—what sacrifice are you willing to offer to survive?"
+	desc = "Rotten bellows that drink deep of miasma and ash. They grant breath where none should be drawn, but every gasp binds the bearer tighter to decay. Too potent for mortal frame, they are a heresy, breathing with a forbidden spark of divinity."
 	maxHealth = 2 * STANDARD_ORGAN_THRESHOLD
 	sellprice = 300
 

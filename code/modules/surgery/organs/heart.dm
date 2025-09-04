@@ -223,19 +223,21 @@
 obj/item/organ/heart/t1
 	name = "completed heart"
 	icon_state = "heart"
-	desc = "The perfect art, it feels... Completed."
+	desc = "The first step on the path of forbidden craft. A vessel shaped to perfection, pulsing with balance between flesh and spirit. To gaze upon it is to feel both awe and unease, for perfection is itself a quiet heresy."
+	maxHealth = 1.2 * STANDARD_ORGAN_THRESHOLD
 	sellprice = 100
 
 /obj/item/organ/heart/t2
 	name = "blessed heart"
 	icon_state = "heart"
-	desc = "They accepted this heresy to defeat a greater heresy. They call it a blessing, but we all know it’s not…"
+	desc = "Offered as a so-called blessing by those who sought strength against greater blasphemies. Its beat is fervent, but hollow, echoing a faith that bends beneath its own weight."
+	maxHealth = 1.5 * STANDARD_ORGAN_THRESHOLD
 	sellprice = 200
 
 /obj/item/organ/heart/t3
 	name = "corrupted heart"
 	icon_state = "heart"
-	desc = "A cursed, perverted artifact. It can serve you well—what sacrifice are you willing to offer to survive?"
+	desc = "A relic defiled beyond return, its rhythm now a hymn to decay. It will serve those desperate enough to bind it, yet demands sacrifice with every beat."
 	maxHealth = 2 * STANDARD_ORGAN_THRESHOLD
 	sellprice = 300
 
@@ -251,11 +253,13 @@ obj/item/organ/heart/t1
 	..()
 	if(M)
 		M.apply_status_effect(/datum/status_effect/buff/t1heart)
+		ADD_TRAIT(M, TRAIT_HEART_T1, TRAIT_GENERIC)
 
 /obj/item/organ/heart/t1/Remove(mob/living/carbon/M, special = 0)
 	..()
 	if(M.has_status_effect(/datum/status_effect/buff/t1heart))
 		M.remove_status_effect(/datum/status_effect/buff/t1heart)
+		REMOVE_TRAIT(M, TRAIT_HEART_T1, TRAIT_GENERIC)
 
 /datum/status_effect/buff/t2heart
 	id = "t2heart"

@@ -135,19 +135,20 @@
 /obj/item/organ/stomach/t1
 	name = "completed stomach"
 	icon_state = "stomach"
-	desc = "The perfect art, it feels... Completed."
+	desc = "An immaculate vessel where hunger is stilled. It churns with quiet heat, reducing all it is given to silence; appetite becomes a measured rite."
 	sellprice = 100
 
 /obj/item/organ/stomach/t2
 	name = "blessed stomach"
 	icon_state = "stomach"
-	desc = "They accepted this heresy to defeat a greater heresy. They call it a blessing, but we all know it’s not…"
+	desc = "Once set apart for the devoted who fasted in Her name. It turns taint to sustenance and bile to mercy."
+	maxHealth = 1.5 * STANDARD_ORGAN_THRESHOLD
 	sellprice = 200
 
 /obj/item/organ/stomach/t3
 	name = "corrupted stomach"
 	icon_state = "stomach"
-	desc = "A cursed, perverted artifact. It can serve you well—what sacrifice are you willing to offer to survive?"
+	desc = "A bottomless maw steeped in blight. Its last bearer crossed the boundary of humanity and fed upon their own kind. It feeds on rot and ash, sparing the bearer, yet each offering only deepens the void."
 	maxHealth = 2 * STANDARD_ORGAN_THRESHOLD
 	sellprice = 300
 

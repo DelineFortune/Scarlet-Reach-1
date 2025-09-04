@@ -471,17 +471,28 @@
 	if(eyes.owner)
 		eyes.owner.update_body_parts(TRUE)
 
+
 /obj/item/organ/eyes/t1
+    parent_type = /obj/item/organ/eyes/robotic/glow
+    name = "Arcane eyes"
+    desc = "Eyes once bestowed upon a student of NOc of knowledge. Their pale gleam pierces the dark, yet offers no comfort. The more one gazes, the more the world withers into silence, and truth itself becomes a burden too heavy to bear."
+    eye_color = "000"
+    actions_types = list(
+        /datum/action/item_action/organ_action/use,
+        /datum/action/item_action/organ_action/toggle
+    )
+
+/obj/item/organ/eyes/t2
 	name = "Blessed dendorite eyes"
-	desc = "Eyes, that will allow you to see your prey... Be blessed, hunter..."
+	desc = "Eyes once bestowed upon the most faithful hunters in the bygone days of the God of Nature. Their gleam pierced thickets and shadowed woods, leading the hunt without falter. Now they shine with a hollow light, a fading memory of devotion and prey long since lost.... Be blessed, hunter..."
 	color = "#c2ae40"
 	eye_color = "#864896"
 	see_in_dark = 5
 	sight_flags = SEE_MOBS 
 
-/obj/item/organ/eyes/t2
+/obj/item/organ/eyes/t3
 	name = "Cursed necran eyes"
-	desc = "Pair of eyes that been stolen from one of Her hounds..."
+	desc = "Eyes stolen from one of Her hounds, who once prowled the paths between the living and the dead. They pierce every veil, dragging forth the lost and the fugitive."
 	icon_state = "burning_eyes"	
 	color = "#c2ae40"
 	eye_color = "#3c6696"
