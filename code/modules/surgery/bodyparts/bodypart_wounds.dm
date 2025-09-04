@@ -193,7 +193,7 @@
 	var/used
 	var/total_dam = get_damage()
 	var/damage_dividend = (total_dam / max_damage)
-	var/resistance = HAS_TRAIT(owner, TRAIT_CRITICAL_RESISTANCE)
+	var/resistance = HAS_TRAIT(owner, TRAIT_CRITICAL_RESISTANCE) || HAS_TRAIT(owner, TRAIT_HEART_T3) || HAS_TRAIT(owner, TRAIT_HEART_T2)
 	if(user && dam)
 		if(user.goodluck(2))
 			dam += 10
@@ -254,7 +254,7 @@
 	var/used
 	var/total_dam = get_damage()
 	var/damage_dividend = (total_dam / max_damage)
-	var/resistance = HAS_TRAIT(owner, TRAIT_CRITICAL_RESISTANCE)
+	var/resistance = HAS_TRAIT(owner, TRAIT_CRITICAL_RESISTANCE) || HAS_TRAIT(owner, TRAIT_HEART_T3) || HAS_TRAIT(owner, TRAIT_HEART_T2)
 	if(user && dam)
 		if(user.goodluck(2))
 			dam += 10
@@ -322,7 +322,7 @@
 	var/used
 	var/total_dam = get_damage()
 	var/damage_dividend = (total_dam / max_damage)
-	var/resistance = HAS_TRAIT(owner, TRAIT_CRITICAL_RESISTANCE)
+	var/resistance = HAS_TRAIT(owner, TRAIT_CRITICAL_RESISTANCE) || HAS_TRAIT(owner, TRAIT_HEART_T3) || HAS_TRAIT(owner, TRAIT_HEART_T2)
 	var/from_behind = FALSE
 	if(user && (owner.dir == turn(get_dir(owner,user), 180)))
 		from_behind = TRUE

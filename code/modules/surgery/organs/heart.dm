@@ -259,7 +259,7 @@ obj/item/organ/heart/t1
 	..()
 	if(M.has_status_effect(/datum/status_effect/buff/t1heart))
 		M.remove_status_effect(/datum/status_effect/buff/t1heart)
-		REMOVE_TRAIT(M, TRAIT_HEART_T1, TRAIT_GENERIC)
+		REMOVE_TRAIT(M, TRAIT_HEART_T1, TRAIT_GENERIC) // kneestingers immunity
 
 /datum/status_effect/buff/t2heart
 	id = "t2heart"
@@ -277,7 +277,7 @@ obj/item/organ/heart/t1
 	..()
 	if(M)
 		M.apply_status_effect(/datum/status_effect/buff/t2heart)
-		ADD_TRAIT(M, TRAIT_HEART_T2, TRAIT_GENERIC)
+		ADD_TRAIT(M, TRAIT_HEART_T2, TRAIT_GENERIC) //Critical reistance, shock immunity, kneestingers immunity
 
 /obj/item/organ/heart/t2/Remove(mob/living/carbon/M, special = 0)
 	..()
@@ -298,10 +298,10 @@ obj/item/organ/heart/t1
 	..()
 	if(M)
 		M.apply_status_effect(/datum/status_effect/buff/t3heart)
-		ADD_TRAIT(M, TRAIT_HEART_T3, TRAIT_GENERIC)
+		ADD_TRAIT(M, TRAIT_HEART_T3, TRAIT_GENERIC) 
 
 /obj/item/organ/heart/t3/Remove(mob/living/carbon/M, special = 0)
 	..()
 	if(M.has_status_effect(/datum/status_effect/buff/t3heart))
 		M.remove_status_effect(/datum/status_effect/buff/t3heart)
-		REMOVE_TRAIT(M, TRAIT_HEART_T3, TRAIT_GENERIC)
+		REMOVE_TRAIT(M, TRAIT_HEART_T3, TRAIT_GENERIC) //Heavy armor, critical resistance, shock immunity, kneestingers immunity

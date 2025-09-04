@@ -737,28 +737,28 @@
 	if(istype(src.wear_armor, /obj/item/clothing))
 		var/obj/item/clothing/CL = src.wear_armor
 		if(CL.armor_class == ARMOR_CLASS_HEAVY)
-			if(!HAS_TRAIT(src, TRAIT_HEAVYARMOR))
+			if(!(HAS_TRAIT(src, TRAIT_HEAVYARMOR) || HAS_TRAIT(src, TRAIT_HEART_T3)))
 				return FALSE
 		if(CL.armor_class == ARMOR_CLASS_MEDIUM)
-			if(!HAS_TRAIT(src, TRAIT_HEAVYARMOR))
+			if(!(HAS_TRAIT(src, TRAIT_HEAVYARMOR) || HAS_TRAIT(src, TRAIT_HEART_T3)))
 				if(!HAS_TRAIT(src, TRAIT_MEDIUMARMOR))
 					return FALSE
 	if(istype(src.wear_shirt, /obj/item/clothing))
 		var/obj/item/clothing/CL = src.wear_shirt
 		if(CL.armor_class == ARMOR_CLASS_HEAVY)
-			if(!HAS_TRAIT(src, TRAIT_HEAVYARMOR))
+			if(!(HAS_TRAIT(src, TRAIT_HEAVYARMOR) || HAS_TRAIT(src, TRAIT_HEART_T3)))
 				return FALSE
 		if(CL.armor_class == ARMOR_CLASS_MEDIUM)
-			if(!HAS_TRAIT(src, TRAIT_HEAVYARMOR))
+			if(!(HAS_TRAIT(src, TRAIT_HEAVYARMOR) || HAS_TRAIT(src, TRAIT_HEART_T3)))
 				if(!HAS_TRAIT(src, TRAIT_MEDIUMARMOR))
 					return FALSE
 	if(istype(src.wear_pants, /obj/item/clothing))
 		var/obj/item/clothing/CL = src.wear_pants
 		if(CL.armor_class == ARMOR_CLASS_HEAVY)
-			if(!HAS_TRAIT(src, TRAIT_HEAVYARMOR))
+			if(!(HAS_TRAIT(src, TRAIT_HEAVYARMOR) || HAS_TRAIT(src, TRAIT_HEART_T3)))
 				return FALSE
 		if(CL.armor_class == ARMOR_CLASS_MEDIUM)
-			if(!HAS_TRAIT(src, TRAIT_HEAVYARMOR))
+			if(!(HAS_TRAIT(src, TRAIT_HEAVYARMOR) || HAS_TRAIT(src, TRAIT_HEART_T3)))
 				if(!HAS_TRAIT(src, TRAIT_MEDIUMARMOR))
 					return FALSE
 	return TRUE
