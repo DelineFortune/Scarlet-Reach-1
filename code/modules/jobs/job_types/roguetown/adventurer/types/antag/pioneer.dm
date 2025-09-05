@@ -138,10 +138,10 @@
 		revert_cast()
 		return FALSE
 
-	if(_is_near_travel_tile(T))
-		to_chat(user, span_warning("Travel path nearby - the mechanism refuses to arm."))
+	for(var/obj/structure/fluff/traveltile/TT in range(1, T))
+		to_chat(user, span_warning("Should find better place to set up the trap."))
 		revert_cast()
-		return FALSE	
+		return FALSE
 
 	var/turf/T = get_turf(user)
 	if(!T || !isturf(T))
@@ -181,11 +181,11 @@
 		revert_cast()
 		return FALSE
 
-	if(_is_near_travel_tile(T))
+	for(var/obj/structure/fluff/traveltile/TT in range(1, T))
 		pending = FALSE
-		to_chat(user, span_warning("Travel markers nearby - the mechanism refuses to arm."))
+		to_chat(user, span_warning("Should find better place to set up the trap."))
 		revert_cast()
-		return FALSE	
+		return FALSE
 
 	_clear_existing_bogtrap(T)
 	_spawn_bogtrap(T, trap_path)
