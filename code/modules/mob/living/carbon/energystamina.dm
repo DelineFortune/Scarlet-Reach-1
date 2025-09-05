@@ -3,7 +3,7 @@
 
 	var/delay = (HAS_TRAIT(src, TRAIT_APRICITY) && GLOB.tod == "day") ? 13 : 20		//Astrata 
 
-	// LUNGS BONUS: regen tick (T1/T2/T3 = -2/-4/-6 ),  8
+	// LUNGS BONUS: regen tick (T1/T2/T3 = -2/-4/-6 ),  8 я ебал эту хуйню господи прости блять
 	var/lungs_delay_bonus = 0
 	if(HAS_TRAIT(src, TRAIT_LUNGS_T1)) lungs_delay_bonus = max(lungs_delay_bonus, 2)
 	if(HAS_TRAIT(src, TRAIT_LUNGS_T2)) lungs_delay_bonus = max(lungs_delay_bonus, 4)
@@ -107,7 +107,9 @@
 	if (reagents?.has_reagent(/datum/reagent/consumable/nutriment)) // we're still digesting so knock off a tiny bit
 		nutrition_amount *= 0.9
 
-	// STOMACH BONUS:  (-10% / -20% / -30%) + cap
+	// STOMACH BONUS:  (-10% / -20% / -30%) + cap 
+	// ууууууууууууууууууууууууууууууууу блять ты в курсе что атлетика и конституция позволяют тебе вообще никогда не голодать потому
+	// что блять это +16% за уровень охуеть спасибо братья 
 	var/stomach_mult = 1.0
 	if(HAS_TRAIT(src, TRAIT_STOMACH_T1)) stomach_mult = min(stomach_mult, 0.90)
 	if(HAS_TRAIT(src, TRAIT_STOMACH_T2)) stomach_mult = min(stomach_mult, 0.80)

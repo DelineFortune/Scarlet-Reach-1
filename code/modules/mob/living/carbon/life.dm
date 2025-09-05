@@ -140,7 +140,7 @@
 /mob/living/carbon/handle_inwater(turf/onturf, extinguish = TRUE, force_drown = FALSE)
 	..()
 	if(!(mobility_flags & MOBILITY_STAND) || force_drown)
-		if(HAS_TRAIT(src, TRAIT_NOBREATH) || HAS_TRAIT(src, TRAIT_WATERBREATHING))
+		if(HAS_TRAIT(src, TRAIT_NOBREATH) || HAS_TRAIT(src, TRAIT_WATERBREATHING) || HAS_TRAIT(src, TRAIT_LUNGS_T3) || HAS_TRAIT(src, TRAIT_LUNGS_T2) || HAS_TRAIT(src, TRAIT_LUNGS_T1))
 			return TRUE
 		if(stat == DEAD && client)
 			GLOB.scarlet_round_stats[STATS_PEOPLE_DROWNED]++
@@ -156,7 +156,7 @@
 
 /mob/living/carbon/human/handle_inwater(turf/onturf, extinguish = TRUE, force_drown = FALSE)
 	. = ..()
-	if(istype(onturf, /turf/open/water/sewer) && !HAS_TRAIT(src, TRAIT_NOSTINK))
+	if(istype(onturf, /turf/open/water/sewer) && !(HAS_TRAIT(src, TRAIT_NOSTINK) || HAS_TRAIT(src, TRAIT_LUNGS_T3)))
 		add_stress(/datum/stressevent/sewertouched)
 
 /mob/living/carbon/proc/get_complex_pain()
@@ -187,7 +187,7 @@
 	return
 
 /mob/living/carbon/proc/has_smoke_protection()
-	if(HAS_TRAIT(src, TRAIT_NOBREATH))
+	if(HAS_TRAIT(src, TRAIT_NOBREATH || HAS_TRAIT(src, TRAIT_LUNGS_T3))
 		return TRUE
 	return FALSE
 

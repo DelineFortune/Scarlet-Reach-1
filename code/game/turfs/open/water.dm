@@ -95,6 +95,8 @@
 		return 0 // going with the flow
 	if(swimmer.buckled)
 		return 0
+	if(HAS_TRAIT(swimmer, TRAIT_LUNGS_T3))
+		return 0	
 	var/abyssor_swim_bonus = HAS_TRAIT(swimmer, TRAIT_ABYSSOR_SWIM) ? 5 : 0
 	var/swimming_skill_level = swimmer.get_skill_level(/datum/skill/misc/swimming) 
 	. = max(BASE_STAM_DRAIN - (swimming_skill_level * STAM_PER_LEVEL) - abyssor_swim_bonus, MIN_STAM_DRAIN)
@@ -118,6 +120,8 @@
 	var/const/LOW_STAM_PENALTY = 7 // only go through this if we'd have to go offscreen otherwise
 	. = ..()
 	if(isliving(traverser) && !HAS_TRAIT(traverser, TRAIT_INFINITE_STAMINA))
+		if(HAS_TRAIT(traverser, TRAIT_LUNGS_T3))
+			return .
 		var/mob/living/living_traverser = traverser
 		var/remaining_stamina = (living_traverser.max_stamina - living_traverser.stamina)
 		if(remaining_stamina < get_stamina_drain(living_traverser, travel_dir)) // not enough stamina reserved to cross
@@ -275,6 +279,8 @@
 
 /turf/open/water/get_slowdown(mob/user)
 	var/returned = slowdown
+	if(isliving(user) && HAS_TRAIT(user, TRAIT_LUNGS_T3))
+		returned = max(returned - 4, 0) 
 	returned = returned - (user.get_skill_level(/datum/skill/misc/swimming))
 	return max(returned, 0)
 

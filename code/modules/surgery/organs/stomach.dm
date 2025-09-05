@@ -170,7 +170,7 @@
 	..()
 	if(M.has_status_effect(/datum/status_effect/buff/t1stomach))
 		M.remove_status_effect(/datum/status_effect/buff/t1stomach)
-		REMOVE_TRAIT(M, TRAIT_T1_STOMACH, TRAIT_GENERIC)
+		REMOVE_TRAIT(M, TRAIT_T1_STOMACH, TRAIT_GENERIC) //nasty eater
 
 /datum/status_effect/buff/t2stomach
 	id = "t2stomach"
@@ -191,7 +191,7 @@
 	..()
 	if(M.has_status_effect(/datum/status_effect/buff/t2stomach))
 		M.remove_status_effect(/datum/status_effect/buff/t2stomach)
-		REMOVE_TRAIT(M, TRAIT_T2_STOMACH , TRAIT_GENERIC)
+		REMOVE_TRAIT(M, TRAIT_T2_STOMACH , TRAIT_GENERIC) //nasty eater+wild eater
 
 
 /atom/movable/screen/alert/status_effect/buff/t3stomach
@@ -212,4 +212,4 @@
 	..()
 	if(M.has_status_effect(/datum/status_effect/buff/t3stomach))
 		M.remove_status_effect(/datum/status_effect/buff/t3stomach)
-		REMOVE_TRAIT(M, TRAIT_T3_STOMACH , TRAIT_GENERIC)
+		REMOVE_TRAIT(M, TRAIT_T3_STOMACH , TRAIT_GENERIC) //nasty eater+wild eater+organ eater
