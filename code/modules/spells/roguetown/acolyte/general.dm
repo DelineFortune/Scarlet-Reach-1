@@ -660,3 +660,6 @@
 		return TRUE
 	revert_cast()
 	return FALSE
+
+
+	
