@@ -7,7 +7,7 @@
 	category_tags = list(CTAG_WRETCH)
 	maximum_possible_slots = 2
 	traits_applied = list(TRAIT_OUTLANDER, TRAIT_OUTLAW, TRAIT_HERESIARCH)
- 
+
 /datum/outfit/job/roguetown/wretch/atgervi/pre_equip(mob/living/carbon/human/H)
 	H.set_blindness(0)
 	to_chat(H, span_warning("You are a Shaman of the Fjall, The Northern Empty. Savage combatants who commune with the Ecclesical Beast gods through ritualistic violence, rather than idle prayer."))
@@ -24,7 +24,7 @@
 	H.dna.species.soundpack_m = new /datum/voicepack/male/warrior()
 	H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/touch/summonrogueweapon/evil/inhumenblade)
 	H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/message)
-	H.change_stat("strength", 3) 
+	H.change_stat("strength", 3)
 	H.change_stat("endurance", 2)
 	H.change_stat("constitution", 2)
 	H.change_stat("intelligence", -1)
