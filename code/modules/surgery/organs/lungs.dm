@@ -84,13 +84,13 @@
 	..()
 	if(M.has_status_effect(/datum/status_effect/buff/t1lungs))
 		M.remove_status_effect(/datum/status_effect/buff/t1lungs)
-		REMOVE_TRAIT(M, TRAIT_T1_LUNGS, TRAIT_GENERIC)
+		REMOVE_TRAIT(M, TRAIT_T1_LUNGS, TRAIT_GENERIC) //waterbreath, +10% stamina regen, regen delay −2 ticks, sprint drain −1.6 .
 
 /datum/status_effect/buff/t2lungs
 	id = "t2lungs"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/t2lungs
 
-/atom/movable/screen/alert/status_effect/buff/t2lungs //your helper against mages but not black king bar
+/atom/movable/screen/alert/status_effect/buff/t2lungs 
 	name = "Blessed lungs"
 	desc = "A blessed lungs... Maybe"
 
@@ -105,7 +105,7 @@
 	..()
 	if(M.has_status_effect(/datum/status_effect/buff/t2lungs))
 		M.remove_status_effect(/datum/status_effect/buff/t2lungs)
-		REMOVE_TRAIT(M, TRAIT_T2_LUNGS , TRAIT_GENERIC)
+		REMOVE_TRAIT(M, TRAIT_T2_LUNGS , TRAIT_GENERIC) //waterbreath, +20% stamina regen, regen delay −4 ticks, sprint drain −1.2.
 
 
 /atom/movable/screen/alert/status_effect/buff/t3lungs
@@ -113,7 +113,7 @@
 	desc = "The cursed thing is inside me now."
 
 /datum/status_effect/buff/t3lungs/tick()
-    owner.adjustOxyLoss(-2)
+    owner.adjustOxyLoss(-5)
 
 /obj/item/organ/lungs/t3/Insert(mob/living/carbon/M)
 	..()
@@ -126,4 +126,4 @@
 	..()
 	if(M.has_status_effect(/datum/status_effect/buff/t3lungs))
 		M.remove_status_effect(/datum/status_effect/buff/t3lungs)
-		REMOVE_TRAIT(M, TRAIT_T3_LUNGS , TRAIT_GENERIC)	
+		REMOVE_TRAIT(M, TRAIT_T3_LUNGS , TRAIT_GENERIC)	//no breath, +30% stamina regen, regen delay −6 ticks, sprint drain −0.8.

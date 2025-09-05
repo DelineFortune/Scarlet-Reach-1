@@ -2,6 +2,14 @@
 	max_stamina = max_energy / 10
 
 	var/delay = (HAS_TRAIT(src, TRAIT_APRICITY) && GLOB.tod == "day") ? 13 : 20		//Astrata 
+
+	// LUNGS BONUS: regen tick (T1/T2/T3 = -2/-4/-6 ),  8
+	var/lungs_delay_bonus = 0
+	if(HAS_TRAIT(src, TRAIT_LUNGS_T1)) lungs_delay_bonus = max(lungs_delay_bonus, 2)
+	if(HAS_TRAIT(src, TRAIT_LUNGS_T2)) lungs_delay_bonus = max(lungs_delay_bonus, 4)
+	if(HAS_TRAIT(src, TRAIT_LUNGS_T3)) lungs_delay_bonus = max(lungs_delay_bonus, 6)
+	delay = max(8, delay - lungs_delay_bonus)
+
 	if(world.time > last_fatigued + delay) //regen fatigue
 		var/added = energy / max_energy
 		added = round(-10 + (added * - 40))
@@ -9,6 +17,14 @@
 			added = round(added * 0.5, 1)
 		if(HAS_TRAIT(src, TRAIT_MONK_ROBE))
 			added = round(added * 1.25, 1)
+
+		// LUNGS BONUS: faster regen (+10/+20/+30%)
+		var/lungs_regen_mult = 1.0
+		if(HAS_TRAIT(src, TRAIT_LUNGS_T1)) lungs_regen_mult = max(lungs_regen_mult, 1.10)
+		if(HAS_TRAIT(src, TRAIT_LUNGS_T2)) lungs_regen_mult = max(lungs_regen_mult, 1.20)
+		if(HAS_TRAIT(src, TRAIT_LUNGS_T3)) lungs_regen_mult = max(lungs_regen_mult, 1.30)
+		added = round(added * lungs_regen_mult, 1)
+
 		if(stamina >= 1)
 			stamina_add(added)
 		else
@@ -22,7 +38,12 @@
 	max_energy = (STAEND + (athletics_skill/2 ) ) * 100
 	if(cmode)
 		if(!HAS_TRAIT(src, TRAIT_BREADY))
-			energy_add(-2)
+			// LUNGS BONUS: less sprint cost (base -2; T1/T2/T3 = -1.6/-1.2/-0.8)
+			var/run_drain = -2.0
+			if(HAS_TRAIT(src, TRAIT_LUNGS_T1)) run_drain = max(run_drain, -1.6)
+			if(HAS_TRAIT(src, TRAIT_LUNGS_T2)) run_drain = max(run_drain, -1.2)
+			if(HAS_TRAIT(src, TRAIT_LUNGS_T3)) run_drain = max(run_drain, -0.8)
+			energy_add(run_drain)
 
 /mob/proc/energy_add(added as num)
 	return
@@ -85,6 +106,16 @@
 
 	if (reagents?.has_reagent(/datum/reagent/consumable/nutriment)) // we're still digesting so knock off a tiny bit
 		nutrition_amount *= 0.9
+
+	// STOMACH BONUS:  (-10% / -20% / -30%) + cap
+	var/stomach_mult = 1.0
+	if(HAS_TRAIT(src, TRAIT_STOMACH_T1)) stomach_mult = min(stomach_mult, 0.90)
+	if(HAS_TRAIT(src, TRAIT_STOMACH_T2)) stomach_mult = min(stomach_mult, 0.80)
+	if(HAS_TRAIT(src, TRAIT_STOMACH_T3)) stomach_mult = min(stomach_mult, 0.70)
+	nutrition_amount *= stomach_mult
+
+	// cap 50%
+	nutrition_amount = max(nutrition_amount, amt * 0.5)
 
 	return nutrition_amount
 
