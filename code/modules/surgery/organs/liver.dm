@@ -171,13 +171,11 @@
 	..()
 	if(M)
 		M.apply_status_effect(/datum/status_effect/buff/t2liver)
-		ADD_TRAIT(M, TRAIT_T2_LIVER, TRAIT_GENERIC)
 
 /obj/item/organ/liver/t2/Remove(mob/living/carbon/M, special = 0)
 	..()
 	if(M.has_status_effect(/datum/status_effect/buff/t2liver))
-		M.remove_status_effect(/datum/status_effect/buff/t2liver)
-		REMOVE_TRAIT(M, TRAIT_T2_LIVER, TRAIT_GENERIC)
+		M.remove_status_effect(/datum/status_effect/buff/t2liver) 
 
 /atom/movable/screen/alert/status_effect/buff/t3liver
 	name = "Corrupted liver"
@@ -190,10 +188,8 @@
 	..()
 	if(M)
 		M.apply_status_effect(/datum/status_effect/buff/t3liver)
-		ADD_TRAIT(M, TRAIT_T3_LIVER, TRAIT_GENERIC)
 
 /obj/item/organ/liver/t3/Remove(mob/living/carbon/M, special = 0)
 	..()
 	if(M.has_status_effect(/datum/status_effect/buff/t3liver))
-		M.remove_status_effect(/datum/status_effect/buff/t3liver)
-		REMOVE_TRAIT(M, TRAIT_T3_LIVER, TRAIT_GENERIC) 
+		M.remove_status_effect(/datum/status_effect/buff/t3liver) 
