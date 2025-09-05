@@ -154,7 +154,7 @@
 		M.remove_status_effect(/datum/status_effect/buff/t1liver)
 
 /datum/status_effect/buff/t1liver/tick()
-    owner.adjustToxLoss(-3)		
+    owner.adjustToxLoss(-5)		
 
 /datum/status_effect/buff/t2liver
 	id = "t2liver"
@@ -165,7 +165,7 @@
 	desc = "Blessed organ, by Pestra..."
 а
 /datum/status_effect/buff/t2liver/tick()
-    owner.adjustToxLoss(-5)
+    owner.adjustToxLoss(-7)
 
 /obj/item/organ/liver/t2/Insert(mob/living/carbon/M)
 	..()
@@ -184,7 +184,7 @@
 	desc = "The cursed thing is inside me now."
 
 /datum/status_effect/buff/t3liver/tick()
-    owner.adjustToxLoss(-7)
+    owner.adjustToxLoss(-10)
 
 /obj/item/organ/liver/t3/Insert(mob/living/carbon/M)
 	..()
@@ -196,4 +196,4 @@
 	..()
 	if(M.has_status_effect(/datum/status_effect/buff/t3liver))
 		M.remove_status_effect(/datum/status_effect/buff/t3liver)
-		REMOVE_TRAIT(M, TRAIT_T3_LIVER, TRAIT_GENERIC)
+		REMOVE_TRAIT(M, TRAIT_T3_LIVER, TRAIT_GENERIC) 

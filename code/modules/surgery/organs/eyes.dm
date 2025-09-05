@@ -471,7 +471,6 @@
 	if(eyes.owner)
 		eyes.owner.update_body_parts(TRUE)
 
-
 /obj/item/organ/eyes/t1
     parent_type = /obj/item/organ/eyes/robotic/glow
     name = "Arcane eyes"
@@ -486,7 +485,7 @@
 	name = "Blessed dendorite eyes"
 	desc = "Eyes once bestowed upon the most faithful hunters in the bygone days of the God of Nature. Their gleam pierced thickets and shadowed woods, leading the hunt without falter. Now they shine with a hollow light, a fading memory of devotion and prey long since lost.... Be blessed, hunter..."
 	color = "#c2ae40"
-	eye_color = "#864896"
+	eye_color = "#76d635ff"
 	see_in_dark = 5
 	sight_flags = SEE_MOBS 
 
@@ -495,7 +494,7 @@
 	desc = "Eyes stolen from one of Her hounds, who once prowled the paths between the living and the dead. They pierce every veil, dragging forth the lost and the fugitive."
 	icon_state = "burning_eyes"	
 	color = "#c2ae40"
-	eye_color = "#3c6696"
+	eye_color = "#350b46ff"
 	sight_flags = SEE_MOBS | SEE_OBJS | SEE_TURFS
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
 	see_in_dark = 10

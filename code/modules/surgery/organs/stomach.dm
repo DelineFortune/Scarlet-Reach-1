@@ -170,13 +170,13 @@
 	..()
 	if(M.has_status_effect(/datum/status_effect/buff/t1stomach))
 		M.remove_status_effect(/datum/status_effect/buff/t1stomach)
-		REMOVE_TRAIT(M, TRAIT_T1_STOMACH, TRAIT_GENERIC) //nasty eater
+		REMOVE_TRAIT(M, TRAIT_T1_STOMACH, TRAIT_GENERIC) //wild eater+rot eater also 10% less hunger
 
 /datum/status_effect/buff/t2stomach
 	id = "t2stomach"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/t2stomach
 
-/atom/movable/screen/alert/status_effect/buff/t2stomach //your helper against mages but not black king bar
+/atom/movable/screen/alert/status_effect/buff/t2stomach 
 	name = "Blessed stomach"
 	desc = "A blessed stomach... Maybe"
 
@@ -186,20 +186,21 @@
 		M.apply_status_effect(/datum/status_effect/buff/t2stomach)
 		ADD_TRAIT(M, TRAIT_T2_STOMACH, TRAIT_GENERIC)
 
+/datum/status_effect/buff/t2stomach/tick()
+	owner.adjustToxLoss(-5)
 
 /obj/item/organ/stomach/t2/Remove(mob/living/carbon/M, special = 0)
 	..()
 	if(M.has_status_effect(/datum/status_effect/buff/t2stomach))
 		M.remove_status_effect(/datum/status_effect/buff/t2stomach)
-		REMOVE_TRAIT(M, TRAIT_T2_STOMACH , TRAIT_GENERIC) //nasty eater+wild eater
-
+		REMOVE_TRAIT(M, TRAIT_T2_STOMACH , TRAIT_GENERIC) //wild eater+rot eater eater also 20% less hunger + can suck blood for food + can drink sea water
 
 /atom/movable/screen/alert/status_effect/buff/t3stomach
 	name = "Corrupted stomach"
 	desc = "Tte cursed thing is inside me now."
 
 /datum/status_effect/buff/t3stomach/tick()
-    owner.adjustOxyLoss(-3)
+	owner.adjustToxLoss(-10)
 
 /obj/item/organ/stomach/t3/Insert(mob/living/carbon/M)
 	..()
@@ -212,4 +213,4 @@
 	..()
 	if(M.has_status_effect(/datum/status_effect/buff/t3stomach))
 		M.remove_status_effect(/datum/status_effect/buff/t3stomach)
-		REMOVE_TRAIT(M, TRAIT_T3_STOMACH , TRAIT_GENERIC) //nasty eater+wild eater+organ eater
+		REMOVE_TRAIT(M, TRAIT_T3_STOMACH , TRAIT_GENERIC) //nasty eater + 30% less hunger + can suck blood to get healing and nutriments + can drink sea water

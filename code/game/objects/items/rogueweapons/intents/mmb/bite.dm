@@ -374,6 +374,12 @@
 			//for Golems. I'd use trait_nohunger but I'm not entirely sure whether it'd mess with any other stuff
 		else if(HAS_TRAIT(user, TRAIT_HORDE))
 			// Horde trait allows safe blood drinking
+		else if(HAS_TRAIT(user, TRAIT_STOMACH_T3) || HAS_TRAIT(user, TRAIT_STOMACH_T2))
+			user.adjust_nutrition(10)
+			user.adjust_hydration(10)
+			if(HAS_TRAIT(user, TRAIT_STOMACH_T3))
+				if(user.reagents)
+					user.reagents.add_reagent(/datum/reagent/medicine/healthpot, 10)
 		else
 			// Non-vampires will vomit
 			to_chat(user, "<span class='warning'>I'm going to puke...</span>")

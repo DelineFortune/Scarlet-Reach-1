@@ -344,7 +344,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	taste_description = "sour meat"
 
 /datum/reagent/toxin/organpoison/on_mob_life(mob/living/carbon/M)
-	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER) && !HAS_TRAIT(M, TRAIT_ORGAN_EATER) && !HAS_TRAIT(M, TRAIT_WILD_EATER))
+	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER) && !HAS_TRAIT(M, TRAIT_ORGAN_EATER) && !HAS_TRAIT(M, TRAIT_WILD_EATER) && !HAS_TRAIT(M, TRAIT_STOMACH_T2) && !HAS_TRAIT(M, TRAIT_STOMACH_T3))
 		return ..()
 
 /datum/reagent/toxin/stampoison
