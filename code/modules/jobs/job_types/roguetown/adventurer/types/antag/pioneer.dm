@@ -138,11 +138,6 @@
 		revert_cast()
 		return FALSE
 
-	for(var/obj/structure/fluff/traveltile/TT in range(1, T))
-		to_chat(user, span_warning("Should find better place to set up the trap."))
-		revert_cast()
-		return FALSE
-
 	var/turf/T = get_turf(user)
 	if(!T || !isturf(T))
 		revert_cast()
@@ -150,6 +145,11 @@
 
 	if(_is_town_blocked(T))
 		to_chat(user, span_warning("I cannot set a bogtrap here; the ground is too hard."))
+		revert_cast()
+		return FALSE
+
+	for(var/obj/structure/fluff/traveltile/TT in range(1, T))
+		to_chat(user, span_warning("Should find better place to set up the trap."))
 		revert_cast()
 		return FALSE
 
