@@ -998,10 +998,10 @@
 		/obj/item/kitchen/spoon/silver,
 		/obj/item/candle/candlestick/gold,
 		/obj/item/candle/candlestick/silver,
-		/obj/item/rogueweapon/sword/long/judgement, // various unique weapons around from a few roles follows. Don't lose your fancy toys.... 
+		/obj/item/rogueweapon/sword/long/judgement, // various unique weapons around from a few roles follows. Don't lose your fancy toys....
 		/obj/item/rogueweapon/sword/long/oathkeeper,
 		/obj/item/rogueweapon/woodstaff/riddle_of_steel/magos, //bit dumb for a bandit mage to toss this toy away but whatever
-		/obj/item/rogueweapon/halberd/psyhalberd, // relic weapons but not standard Inquisition stuff 
+		/obj/item/rogueweapon/halberd/psyhalberd, // relic weapons but not standard Inquisition stuff
 		/obj/item/rogueweapon/greatsword/psygsword,
 	)
 
@@ -1345,13 +1345,319 @@
 		H.dir = SOUTH
 		add_overlay(H)
 
-/obj/structure/fluff/headstake/attack_hand(mob/user)
-	. = ..()
-	if(.)
+/////////////////////////////////////////////////////////////////////////////
+// CHURCH LOOP STARTS HERE /////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+// ==================================================================
+
+// =========================================================
+// Church Sacrifice System
+// =========================================================
+
+
+/mob/living/carbon/human
+    var/church_favor = 0
+    var/church_total_donated = 0
+
+
+/datum/church_sacrifice_system_bank
+	// FALSE — молиться можно ТОЛЬКО в церкви
+	// TRUE  — молиться можно везде
+	var/allow_prayer = FALSE
+
+	var/divine_passive_enabled = FALSE
+
+	var/divine_passive_bonus = 0.0
+
+var/global/datum/church_sacrifice_system_bank/church_sacrifice_system_bank = new
+
+// ============================
+//  ASTRATA STATUE
+// =======================================
+
+/obj/structure/fluff/statue/astratacore
+	name = "statue of Astrata"
+	desc = "A masterfully carved stone likeness of the sun goddess Astrata, adorned with golden inlays that gleam warmly even in shadow. It will accept money and valuable metals as offerings, which will be used as a proof of devotion to the Ten."
+	icon = 'icons/roguetown/misc/64x64.dmi'
+	icon_state = "astratastatue"
+	density = TRUE
+	anchored = TRUE
+	layer = ABOVE_MOB_LAYER
+
+	// UI-локали
+	var/current_tab = "Main"
+	var/current_cat = "1"
+	var/ui_width = 370
+	var/ui_height = 600
+
+	var/treasuretypes = list(
+		/obj/item/roguecoin,
+		/obj/item/roguegem,
+		/obj/item/clothing/ring,
+		/obj/item/ingot/gold,
+		/obj/item/ingot/silver,
+		/obj/item/ingot/silverblessed,
+		/obj/item/ingot/blacksteel,
+		/obj/item/clothing/neck/roguetown/psicross,
+		/obj/item/reagent_containers/glass/cup,
+		/obj/item/roguestatue,
+		/obj/item/riddleofsteel,
+		/obj/item/scomstone/listenstone,
+		/obj/item/clothing/neck/roguetown/shalal,
+		/obj/item/clothing/neck/roguetown/horus,
+		/obj/item/rogue/painting,
+		/obj/item/clothing/head/roguetown/crown/serpcrown,
+		/obj/item/clothing/head/roguetown/vampire,
+		/obj/item/scomstone,
+		/obj/item/cooking/platter/silver,
+		/obj/item/cooking/platter/gold,
+		/obj/item/reagent_containers/glass/bowl/silver,
+		/obj/item/reagent_containers/glass/bowl/gold,
+		/obj/item/kitchen/spoon/gold,
+		/obj/item/kitchen/spoon/silver,
+		/obj/item/candle/candlestick/gold,
+		/obj/item/candle/candlestick/silver,
+		/obj/item/rogueweapon/sword/long/judgement,
+		/obj/item/rogueweapon/sword/long/oathkeeper,
+		/obj/item/rogueweapon/woodstaff/riddle_of_steel/magos,
+		/obj/item/rogueweapon/halberd/psyhalberd,
+		/obj/item/rogueweapon/greatsword/psygsword,
+	)
+
+	examine(mob/user)
+		. = ..()
+		. += "<br><i>Gold is a pledge, silver a vow, copper a seed—cast them, and the Ten will remember.</i>"
+
+
+	Topic(href, href_list)
+		. = ..()
+		if(!usr || !usr.canUseTopic(src, BE_CLOSE))
+			return
+		if(!ishuman(usr))
+			return
+
+		if(href_list["tab"])
+			current_tab = href_list["tab"]
+			return attack_hand(usr)
+
+		if(href_list["changecat"])
+			current_cat = href_list["changecat"]
+			return attack_hand(usr)
+
+		var/datum/church_sacrifice_system_bank/bank = church_sacrifice_system_bank
+		var/mob/living/carbon/human/H = usr
+
+
+		if(href_list["church_toggle_pray_global"] || href_list["church_toggle_passive"] || href_list["church_toggle_passive_bonus"])
+			if(!HAS_TRAIT(H, TRAIT_CLERGY))
+				to_chat(H, span_warning("The statue regards you in silence."))
+				return attack_hand(usr)
+			if(!istype(H.patron, /datum/patron/divine))
+				to_chat(H, span_warning("Only the faithful of the Ten may alter these rites."))
+				return attack_hand(usr)
+
+		if(href_list["church_toggle_pray_global"])
+			if(bank)
+				bank.allow_prayer = !bank.allow_prayer
+				var/msg = bank.allow_prayer ? "<b>Prayer may be offered anywhere by the faithful of the Ten.</b>" : "<b>Prayer is bound to the Church for the Ten’s faithful.</b>"
+				for(var/mob/player in GLOB.player_list)
+					if(!player || !isliving(player)) continue
+					if(!HAS_TRAIT(player, TRAIT_CLERGY)) continue
+					if(!ishuman(player)) continue
+					var/mob/living/carbon/human/P = player
+					if(!istype(P.patron, /datum/patron/divine)) continue
+					to_chat(P, "<font color='yellow'>[H.real_name] issues a decree: [msg]</font>")
+			return attack_hand(usr)
+
+		if(href_list["church_toggle_passive"])
+			if(bank)
+				bank.divine_passive_enabled = !bank.divine_passive_enabled
+				var/msg2 = bank.divine_passive_enabled ? "The Ten breathe softly again." : "The Ten’s hush deepens."
+				apply_divine_passive_flags_to_all()
+				for(var/mob/player3 in GLOB.player_list)
+					if(!player3 || !isliving(player3)) continue
+					if(!HAS_TRAIT(player3, TRAIT_CLERGY)) continue
+					var/mob/living/carbon/human/P3 = player3
+					if(!istype(P3.patron, /datum/patron/divine)) continue
+					to_chat(P3, "<font color='yellow'>[H.real_name] alters the stillness: [msg2]</font>")
+			return attack_hand(usr)
+
+		if(href_list["church_toggle_passive_bonus"])
+			if(bank)
+				bank.divine_passive_bonus = (bank.divine_passive_bonus >= 0.5) ? 0.0 : 0.5
+				var/msg3 = bank.divine_passive_bonus >= 0.5 ? "Whispers grow nearer (+50% passive)." : "Whispers recede (no passive bonus)."
+				apply_divine_passive_flags_to_all()
+				for(var/mob/player4 in GLOB.player_list)
+					if(!player4 || !isliving(player4)) continue
+					if(!HAS_TRAIT(player4, TRAIT_CLERGY)) continue
+					var/mob/living/carbon/human/P4 = player4
+					if(!istype(P4.patron, /datum/patron/divine)) continue
+					to_chat(P4, "<font color='yellow'>[H.real_name] bends the rhythm: [msg3]</font>")
+			return attack_hand(usr)
+
 		return
-	to_chat(user, span_notice("I take down [src]."))
-	victim.forceMove(drop_location())
-	victim = null
-	stake.forceMove(drop_location())
-	stake = null
-	qdel(src)
+
+	proc/apply_divine_passive_flags_to_all()
+		var/datum/church_sacrifice_system_bank/bank = church_sacrifice_system_bank
+		if(!bank)
+			return
+		for(var/mob/M in GLOB.player_list)
+			if(!M || !isliving(M)) continue
+			if(!HAS_TRAIT(M, TRAIT_CLERGY)) continue
+			if(!ishuman(M)) continue
+			var/mob/living/carbon/human/H = M
+			if(!istype(H.patron, /datum/patron/divine)) continue
+			if(!H.devotion) continue
+
+			if(bank.divine_passive_enabled)
+				var/base = CLERIC_REGEN_DEVOTEE // 0.3
+				var/factor = 1 + max(0, bank.divine_passive_bonus) // 1.0 или 1.5
+				H.devotion.passive_devotion_gain = base * factor
+				H.devotion.passive_progression_gain = base * factor
+				START_PROCESSING(SSobj, H.devotion)
+			else
+				H.devotion.passive_devotion_gain = 0
+				H.devotion.passive_progression_gain = 0
+				STOP_PROCESSING(SSobj, H.devotion)
+
+	attack_hand(mob/living/user)
+		. = ..()
+		if(.)
+			return
+		if(!ishuman(user))
+			return
+		user.changeNext_move(CLICK_CD_INTENTCAP)
+
+		var/mob/living/carbon/human/H = ishuman(user) ? user : null
+		var/favor_num = H ? H.church_favor : 0
+		var/can_afford_tab = (favor_num >= 250) // только для подсветки кнопки (HTML)
+
+		var/contents = ""
+		contents += "<center><h3>Altar of the Ten</h3></center>"
+		contents += "<hr>"
+		contents += "<b>Your Favor:</b> [favor_num]<br><br>"
+
+		if(current_tab == "Main")
+			contents += "<center><b>Main</b>&nbsp;&nbsp;<a href='?src=[REF(src)];tab=Devotion'>Devotion</a></center><hr>"
+			contents += build_main_tab_html(user)
+		else
+			contents += "<center><a href='?src=[REF(src)];tab=Main'>Main</a>&nbsp;&nbsp;<b>Devotion</b></center><hr>"
+			contents += build_devotion_tab_html(user)
+
+		var/datum/browser/popup = new(user, "ASTRATA_ALTAR", "", ui_width, ui_height)
+		popup.set_content(contents)
+		popup.open()
+		return
+
+
+	proc/build_main_tab_html(mob/living/user)
+		var/mob/living/carbon/human/H = ishuman(user) ? user : null
+		var/favor_num = H ? H.church_favor : 0
+		var/can_afford_tab = (favor_num >= 250)
+
+		var/html = ""
+		html += "<div style='margin:4px 6px;'>"
+		html += "<i>Lay down what bears weight: coin, craft and precious work. The shrine will not forget.</i><br>"
+		html += "<small>Offerings deemed worthy are consumed; unworthy are refused.</small>"
+		html += "</div><hr>"
+
+		if(current_cat == "1")
+			html += "<center>"
+			html += "<b>Choose a category</b><br><br>"
+			html += "<div style='margin-bottom:6px;'>"
+			html += "Organs — <span style='color:#e67e22'>Locked</span> &nbsp; "
+			html += "<a href='?src=[REF(src)];noop=1' style='color:[can_afford_tab ? "#2ecc71" : "#7f8c8d"];'>Unlock tab (250 Favor)</a><br>"
+			html += "Artifacts — <span style='color:#e67e22'>Locked</span> &nbsp; "
+			html += "<a href='?src=[REF(src)];noop=1' style='color:[can_afford_tab ? "#2ecc71" : "#7f8c8d"];'>Unlock tab (250 Favor)</a><br>"
+			html += "Knowledge — <span style='color:#e67e22'>Locked</span> &nbsp; "
+			html += "<a href='?src=[REF(src)];noop=1' style='color:[can_afford_tab ? "#2ecc71" : "#7f8c8d"];'>Unlock tab (250 Favor)</a><br>"
+			html += "Taboos — <span style='color:#e67e22'>Locked</span> &nbsp; "
+			html += "<a href='?src=[REF(src)];noop=1' style='color:[can_afford_tab ? "#2ecc71" : "#7f8c8d"];'>Unlock tab (250 Favor)</a><br>"
+			html += "Devotion — <span style='color:#e67e22'>Locked</span> &nbsp; "
+			html += "<a href='?src=[REF(src)];noop=1' style='color:[can_afford_tab ? "#2ecc71" : "#7f8c8d"];'>Unlock tab (250 Favor)</a><br>"
+			html += "</div><br>"
+			html += "<!-- Когда реализуешь серверную логику — меняй \"Locked\" на <span style=\"color:#2ecc71\">Unlocked</span> и ссылку на реальный href типа unlock_tab=... -->"
+			html += "<br>"
+			html += "<a href='?src=[REF(src)];changecat=Organs'>Go to Organs</a><br>"
+			html += "<a href='?src=[REF(src)];changecat=Artifacts'>Go to Artifacts</a><br>"
+			html += "<a href='?src=[REF(src)];changecat=Knowledge'>Go to Knowledge</a><br>"
+			html += "<a href='?src=[REF(src)];changecat=Taboos'>Go to Taboos</a><br>"
+			html += "<a href='?src=[REF(src)];changecat=Devotion'>Go to Devotion</a><br>"
+			html += "</center>"
+		else
+			html += "<center><b>[current_cat]</b></center>"
+			html += "<center><a href='?src=[REF(src)];changecat=1'>\[RETURN\]</a><br><br></center>"
+			html += "<div style='margin:4px 6px;'><small>No listings yet.</small></div>"
+		return html
+
+
+	proc/build_devotion_tab_html(mob/living/user)
+		var/mob/living/carbon/human/H = ishuman(user) ? user : null
+		var/favor_num = H ? H.church_favor : 0
+		var/can_afford_ctrl = (favor_num >= 150)
+
+		var/html = ""
+		html += "<div style='margin:4px 6px;'>"
+		html += "<i>Speak softly and kneel. When the Ten are near, even a whisper is a bell.</i><br>"
+		html += "<small>These controls affect only the faithful who follow the Divine.</small>"
+		html += "</div><hr>"
+
+		html += "<b>Current State (Divine only)</b><br>"
+		html += "&nbsp;• Prayer scope: <span style='color:#e67e22'>Church-only</span> &nbsp; "
+		html += "<a href='?src=[REF(src)];noop=1' style='color:[can_afford_ctrl ? "#2ecc71" : "#7f8c8d"];'>Unlock control (150 Favor)</a><br>"
+		html += "&nbsp;• Passive: <span style='color:#e67e22'>Disabled</span> &nbsp; "
+		html += "<a href='?src=[REF(src)];noop=1' style='color:[can_afford_ctrl ? "#2ecc71" : "#7f8c8d"];'>Unlock control (150 Favor)</a><br>"
+		html += "&nbsp;• Passive bonus: <span style='color:#e67e22'>0%</span> &nbsp; "
+		html += "<a href='?src=[REF(src)];noop=1' style='color:[can_afford_ctrl ? "#2ecc71" : "#7f8c8d"];'>Unlock control (150 Favor)</a><br>"
+		html += "<hr>"
+
+		html += "<b>Controls</b><br>"
+		html += "<a href='?src=[REF(src)];noop=1'>Toggle Prayer Scope</a><br>"
+		html += "<a href='?src=[REF(src)];noop=1'>Toggle Passive</a><br>"
+		html += "<a href='?src=[REF(src)];noop=1'>Toggle Passive Bonus</a><br>"
+		html += "<hr>"
+		html += "<small>Non-divine followers are unaffected by these decrees.</small>"
+
+		return html
+
+
+	attackby(obj/item/W, mob/user, params)
+		if(!HAS_TRAIT(user, TRAIT_CLERGY))
+			return ..()
+
+		if(W.flags_1 & HOARDMASTER_SPAWNED_1)
+			to_chat(user, span_warning("This item is from the Hoard!"))
+			return ..()
+
+		var/proceed_with_offer = FALSE
+		for(var/TT in treasuretypes)
+			if(istype(W, TT))
+				proceed_with_offer = TRUE
+				break
+
+		if(!proceed_with_offer)
+			to_chat(user, span_warning("This item isn't a good offering."))
+			return ..()
+
+		var/donatedamnt = W.get_real_price()
+		if(W.sellprice <= 0 || donatedamnt <= 0)
+			to_chat(user, span_warning("This item is worthless."))
+			return ..()
+
+		playsound(loc,'sound/items/carvty.ogg', 50, TRUE)
+		qdel(W)
+
+		var/mob/living/carbon/human/H = ishuman(user) ? user : null
+		if(H)
+			H.church_favor = max(0, H.church_favor + donatedamnt)
+			H.church_total_donated = max(0, H.church_total_donated + donatedamnt)
+
+		for(var/mob/player in GLOB.player_list)
+			if(!player?.mind) continue
+			if(HAS_TRAIT(player, TRAIT_CLERGY))
+				if(H)
+					to_chat(player, "<font color='yellow'>[H.real_name] donates [donatedamnt] to the shrine! Their favor is now [H.church_favor].</font>")
+				else
+					to_chat(player, "<font color='yellow'>Someone donates [donatedamnt] to the shrine!</font>")
+
+		return ..()
