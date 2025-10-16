@@ -19540,6 +19540,10 @@
 	dir = 4
 	},
 /area/rogue/indoors)
+"fCe" = (
+/obj/structure/roguemachine/duoface,
+/turf/closed/wall/mineral/rogue/stone,
+/area/rogue/outdoors/beach)
 "fCh" = (
 /turf/closed/wall/mineral/rogue/roofwall/outercorner{
 	dir = 4
@@ -290883,7 +290887,7 @@ euk
 euk
 icp
 pFN
-icp
+crl
 icp
 icp
 icp
@@ -291335,7 +291339,7 @@ euk
 euk
 euk
 icp
-icp
+fCe
 icp
 icp
 icp

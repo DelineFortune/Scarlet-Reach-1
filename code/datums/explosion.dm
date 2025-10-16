@@ -185,7 +185,6 @@ GLOBAL_LIST_EMPTY(explosions)
 				dist += cached_exp_block[Trajectory]
 
 		var/flame_dist = dist < flame_range
-		var/throw_dist = dist
 
 		if(dist < devastation_range)
 			dist = EXPLODE_DEVASTATE
@@ -202,7 +201,7 @@ GLOBAL_LIST_EMPTY(explosions)
 			var/list/items = list()
 			for(var/I in T)
 				var/atom/A = I
-				if (!(A.flags_1 & PREVENT_CONTENTS_EXPLOSION_1)) //The atom/contents_explosion() proc returns null if the contents ex_acting has been handled by the atom, and TRUE if it hasn't.
+				if (!(A.flags_1 & PREVENT_CONTENTS_EXPLOSION_1))
 					items += A.GetAllContents()
 			for(var/O in items)
 				var/atom/A = O
@@ -213,19 +212,23 @@ GLOBAL_LIST_EMPTY(explosions)
 			new /obj/effect/hotspot(T) //Mostly for ambience!
 
 		if(dist > EXPLODE_NONE)
-			T.explosion_level = max(T.explosion_level, dist)	//let the bigger one have it
+			T.explosion_level = max(T.explosion_level, dist)
 			T.explosion_id = id
-			T.ex_act(dist)
+			if(istype(T, /turf/closed/wall))
+				var/turf/closed/wall/W = T
+				W.ex_act(dist, epicenter, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range)
+			else
+				T.ex_act(dist)
 			exploded_this_tick += T
 
 		//--- THROW STUFF AROUND ---
-
+		/*
 		var/throw_dir = get_dir(epicenter,T)
 		for(var/atom/movable/A in T)
 			if(!A.anchored)
 				var/throw_range = rand(throw_dist, max_range)
 				var/turf/throw_at = get_ranged_target_turf(A, throw_dir, throw_range)
-				A.throw_at(throw_at, throw_range, EXPLOSION_THROW_SPEED)
+				A.throw_at(throw_at, throw_range, EXPLOSION_THROW_SPEED) */
 
 		//wait for the lists to repop
 		var/break_condition
