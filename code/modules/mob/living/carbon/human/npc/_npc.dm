@@ -28,6 +28,9 @@
 	var/resist_attempts = 0
 	var/ai_currently_active = FALSE
 	var/attack_speed = 0
+	var/tmp/ai_awake = FALSE                 //SShuman npc is awake and processing AI
+	var/tmp/ai_prox_loop_started = FALSE     // check if the prox loop has been started for this npc (its serching for players in range)
+	var/tmp/ai_last_player_time = 0          // have we seen the player recently?
 
 	/// (BOOL) If TRUE, the mob will taunt players in certain situations. Psychological warfare!
 	var/rude = FALSE
@@ -53,7 +56,7 @@
 	if(client)
 		if(!ai_when_client)
 			return
-	START_PROCESSING(SShumannpc,src)
+	ai_enable_proximity_sleep()
 
 /mob/living/carbon/human/proc/check_mouth_grabbed()
 	var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
@@ -96,6 +99,8 @@
 	// Prevent expensive pathing if it is in idle mode and there's no players
 	if((mode == NPC_AI_IDLE || mode == NPC_AI_OFF) && !scan_for_player_in_range())
 		return FALSE
+	if(!ai_awake)
+		return FALSE
 	if(IsDeadOrIncap())
 		walk_to(src,0)
 		return stat == DEAD // only stop processing if we're dead-dead
@@ -104,6 +109,8 @@
 		if(!ai_when_client)
 			walk_to(src,0)
 			return TRUE //remove us from processing
+	if(scan_for_player_in_range())
+		ai_last_player_time = world.time
 	cmode = 1
 	update_cone_show()
 	steps_moved_this_turn = 0
@@ -282,7 +289,7 @@
 	m_intent = old_m_intent
 	return FALSE
 
-/// Force the NPC to jump to a specific destination. Handles 
+/// Force the NPC to jump to a specific destination. Handles
 /mob/living/carbon/human/proc/npc_try_jump_to(atom/jump_destination)
 	if(!jump_destination)
 		return FALSE
@@ -588,7 +595,7 @@
 			// Flee before trying to pick up a weapon.
 			if(flee_in_pain && target && (target.stat == CONSCIOUS))
 				var/paine = get_complex_pain()
-				if(paine >= ((STAEND * 10)*0.9)) 
+				if(paine >= ((STAEND * 10)*0.9))
 					NPC_THINK("Ouch! Entering flee mode!")
 					mode = NPC_AI_FLEE
 					m_intent = MOVE_INTENT_RUN
@@ -674,7 +681,6 @@
 			return TRUE
 
 	return IsStandingStill()
-
 
 /mob/living/carbon/human/proc/back_to_idle()
 	last_aggro_loss = world.time
@@ -788,7 +794,7 @@
 			return TRUE // and end turn
 	else if(!OffWeapon && prob(make_grab_chance)) // grab with our empty offhand instead of attack
 		if(npc_try_make_grab(victim)) // returns TRUE if we've finished our turn, not if we succeeded at the grab
-			return TRUE 
+			return TRUE
 
 	// attack with weapon if we have one
 	if(Weapon)
@@ -849,6 +855,7 @@
 
 // get angry at a mob
 /mob/living/carbon/human/proc/retaliate(mob/living/L)
+	ai_wake()
 	if(!wander)
 		wander = TRUE
 	if(L == src)
@@ -874,7 +881,6 @@
 		if(pathfinding_target != target)
 			clear_path() // Cancel pathfinding so that we can pursue our new enemy.
 		enemies |= L
-
 
 /mob/living/carbon/human/attackby(obj/item/W, mob/user, params)
 	. = ..()
@@ -922,3 +928,49 @@
 		return TRUE
 	else
 		return FALSE
+
+/mob/living/carbon/human/proc/ai_enable_proximity_sleep()
+	if(ai_prox_loop_started)
+		return
+	ai_prox_loop_started = TRUE
+
+	if(scan_for_player_in_range())
+		ai_last_player_time = world.time
+		ai_wake()
+	else
+		ai_sleep()
+
+	addtimer(CALLBACK(src, PROC_REF(ai_proximity_tick)), rand(5 SECONDS, 15 SECONDS))
+
+/mob/living/carbon/human/proc/ai_proximity_tick()
+	if(qdel(src) || stat == DEAD)
+		return
+
+	if(client && !ai_when_client)
+		ai_sleep()
+		addtimer(CALLBACK(src, PROC_REF(ai_proximity_tick)), rand(5 SECONDS, 15 SECONDS))
+		return
+
+	var/players_near = scan_for_player_in_range()
+	if(players_near)
+		ai_last_player_time = world.time
+		if(!ai_awake)
+			ai_wake()
+	else
+		if(ai_awake && world.time >= ai_last_player_time + 10 SECONDS)
+			ai_sleep()
+
+	addtimer(CALLBACK(src, PROC_REF(ai_proximity_tick)), rand(5 SECONDS, 15 SECONDS))
+
+/mob/living/carbon/human/proc/ai_wake()
+	if(ai_awake) return
+	ai_awake = TRUE
+	ai_currently_active = TRUE
+	START_PROCESSING(SShumannpc, src)
+
+/mob/living/carbon/human/proc/ai_sleep()
+	if(!ai_awake) return
+	ai_awake = FALSE
+	ai_currently_active = FALSE
+	walk_to(src, 0)
+	STOP_PROCESSING(SShumannpc, src)

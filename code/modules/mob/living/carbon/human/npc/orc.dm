@@ -11,7 +11,7 @@
 					 /obj/item/bodypart/r_arm, /obj/item/bodypart/r_leg, /obj/item/bodypart/l_leg)
 	faction = list("orcs")
 	ambushable = FALSE
-	
+
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
 	a_intent = INTENT_HELP
 	possible_mmb_intents = list(INTENT_STEAL, INTENT_JUMP, INTENT_KICK, INTENT_BITE)
@@ -22,6 +22,12 @@
 	mode = NPC_AI_IDLE
 	wander = FALSE
 	cmode_music = FALSE
+
+
+/mob/living/carbon/human/species/orc/npc/Initialize()
+	. = ..()
+	spawn(10)
+		handle_ai()
 
 /datum/outfit/job/roguetown/orc/npc/pre_equip(mob/living/carbon/human/H) //gives some default skills and equipment for player controlled orcs
 	..()

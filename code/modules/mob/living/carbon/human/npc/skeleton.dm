@@ -35,6 +35,7 @@
 	cut_overlays()
 	spawn(10)
 		after_creation()
+		handle_ai()
 
 /mob/living/carbon/human/species/skeleton/after_creation()
 	..()
