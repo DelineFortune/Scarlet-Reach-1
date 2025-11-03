@@ -108,6 +108,12 @@
 	desc = span_blue("Relaxing.")
 	timer = 1 MINUTES
 
+/datum/stressevent/bathwater/on_apply(mob/living/user)
+	. = ..()
+	if(user.client)
+		record_round_statistic(STATS_BATHS_TAKEN)
+		// SEND_SIGNAL(user, COMSIG_BATH_TAKEN)
+
 /datum/stressevent/beautiful
 	stressadd = -2
 	desc = span_green("Their face is a work of art!")
@@ -266,6 +272,12 @@
 	stressadd = -5
 	desc = span_green("All my problems have washed away!")
 
+
+/datum/stressevent/peacecake
+	timer = 5 MINUTES
+	stressadd = -3
+	desc = span_green("My problems ease away.")
+
 /datum/stressevent/noble_bowed_to
 	timer = 5 MINUTES
 	stressadd = -3
@@ -313,6 +325,11 @@
 	stressadd = -5
 	desc = span_green("I feel inspired by the sermon.")
 	timer = 20 MINUTES
+
+/datum/stressevent/blessed_weapon
+	stressadd = -3
+	timer = 999 MINUTES
+	desc = span_green("I'm wielding a BLESSED weapon!")
 
 /datum/stressevent/champion
 	stressadd = -3

@@ -126,7 +126,7 @@
 /mob/living/proc/handle_inwater(turf/onturf, extinguish = TRUE, force_drown = FALSE)
 	if(!extinguish)
 		return
-	ExtinguishMob()
+	extinguish_mob()
 
 /mob/living/carbon/handle_inwater(turf/onturf, extinguish = TRUE, force_drown = FALSE)
 	..()
@@ -134,7 +134,7 @@
 		if (HAS_TRAIT(src, TRAIT_NOBREATH) || HAS_TRAIT(src, TRAIT_WATERBREATHING) || HAS_TRAIT(src, TRAIT_HOLDBREATH))
 			return TRUE
 		if(stat == DEAD && client)
-			GLOB.scarlet_round_stats[STATS_PEOPLE_DROWNED]++
+			record_round_statistic(STATS_PEOPLE_DROWNED)
 		var/drown_damage = has_world_trait(/datum/world_trait/abyssor_rage) ? 10 : 5
 		adjustOxyLoss(drown_damage)
 		emote("drown")

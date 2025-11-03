@@ -36,33 +36,6 @@
 	desc = "My body can barely hold it!"
 	icon_state = "hunger3"
 
-//SILVER DAGGER EFFECT
-
-/datum/status_effect/debuff/silver_curse
-	id = "silver_curse"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/silver_curse
-	effectedstats = list("strength" = -2,"perception" = -2,"intelligence" = -2, "constitution" = -2, "endurance" = -2, "speed" = -2)
-	duration = 45 SECONDS
-
-/atom/movable/screen/alert/status_effect/debuff/silver_curse
-	name = "Silver Curse"
-	desc = "My BANE!"
-	icon_state = "hunger3"
-
-/datum/status_effect/debuff/silver_curse_weaker
-	id = "silver_curse_weaker"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/silver_curse_weaker
-	effectedstats = list("strength" = -1,"perception" = -1,"intelligence" = -1, "speed" = -1)
-	duration = 20 SECONDS
-
-/atom/movable/screen/alert/status_effect/debuff/silver_curse_weaker
-	name = "Silver Curse, Lesser"
-	desc = "My BANE!"
-	icon_state = "hunger3"
-
-////////////////////
-
-
 /datum/status_effect/debuff/thirstyt1
 	id = "thirsty1"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt1
@@ -524,6 +497,17 @@
 /atom/movable/screen/alert/status_effect/debuff/cold
 	name = "Cold"
 	desc = "Something has chilled me to the bone! It's hard to move."
+	icon_state = "muscles"
+
+/datum/status_effect/debuff/sunspurn
+	id = "Sunspurn"
+	alert_type =  /atom/movable/screen/alert/status_effect/debuff/sunspurn
+	effectedstats = list("strength" = -2, "endurance" = -3, "constitution" = -3)
+	duration = 1 MINUTES
+
+/atom/movable/screen/alert/status_effect/debuff/sunspurn
+	name = "Sunspurned"
+	desc = "Astrata spurns me! I feel so weak..."
 	icon_state = "muscles"
 
 ///////////////////////

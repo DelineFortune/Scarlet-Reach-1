@@ -30,7 +30,7 @@ GLOBAL_LIST_EMPTY(heretical_players)
 
 	display_order = JDO_PRIEST
 	give_bank_account = 115
-	min_pq = 35 // You should know the basics of things if you're going to lead the town's entire religious sector
+	min_pq = 20 // You should know the basics of things if you're going to lead the town's entire religious sector
 	max_pq = null
 	round_contrib_points = 3
 
@@ -39,6 +39,7 @@ GLOBAL_LIST_EMPTY(heretical_players)
 		/datum/virtue/utility/noble,
 		/datum/virtue/utility/blueblooded,
 		/datum/virtue/combat/hollow_life,
+		/datum/virtue/combat/vampire,
 	)
 
 	job_traits = list(TRAIT_CHOSEN, TRAIT_RITUALIST, TRAIT_GRAVEROBBER, TRAIT_SOUL_EXAMINE)

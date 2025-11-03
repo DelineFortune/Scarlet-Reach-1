@@ -21,12 +21,13 @@
 	display_order = JDO_PURITAN
 	advclass_cat_rolls = list(CTAG_PURITAN = 20)
 	give_bank_account = 30
-	min_pq = 30
+	min_pq = 20
 	max_pq = null
 	round_contrib_points = 2
 
 	virtue_restrictions = list(
 		/datum/virtue/combat/hollow_life,
+		/datum/virtue/combat/vampire,
 	)
 
 	job_subclasses = list(

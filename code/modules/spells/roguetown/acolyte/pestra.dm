@@ -1,6 +1,7 @@
 // Diagnose
 /obj/effect/proc_holder/spell/invoked/diagnose
 	name = "Diagnose"
+	desc = "Examine a target to discern injuries they have, if any."
 	overlay_state = "diagnose"
 	releasedrain = 10
 	chargedrain = 0
@@ -56,6 +57,7 @@
 // Limb or organ attachment
 /obj/effect/proc_holder/spell/invoked/attach_bodypart
 	name = "Bodypart Miracle"
+	desc = "Attach a bodypart to your target."
 	overlay_state = "limb_attach"
 	releasedrain = 30
 	chargedrain = 0
@@ -161,7 +163,7 @@
 
 /obj/effect/proc_holder/spell/invoked/infestation
 	name = "Infestation"
-	desc = "Causes a swarm of bugs to surround your target, bites them and causes sickness."
+	desc = "Causes a swarm of bugs to surround your target, bite them and cause sickness."
 	overlay_state = "null" //sprite later
 	releasedrain = 50
 	chargetime = 10
@@ -247,6 +249,7 @@
 // Cure rot
 /obj/effect/proc_holder/spell/invoked/cure_rot
 	name = "Cure Rot"
+	desc = "Invoke Pestra's power to remove all deadite-rot from a target."
 	overlay_state = "cure_rot"
 	releasedrain = 90
 	chargedrain = 0
@@ -325,6 +328,7 @@
 
 /obj/effect/proc_holder/spell/invoked/pestra_leech
 	name = "Leeching Purge"
+	desc = "Force a target to vomit leeches, purging their body of toxins."
 	overlay_state = "leech_purge"
 	releasedrain = 30
 	chargedrain = 0
