@@ -23,7 +23,6 @@
 			to_chat(H, span_warning("You are relatively versed in the art of \"swinging a sword until enemy death.\" - You would gladly take up most jobs for money, or a chance to cut loose."))
 			belt = /obj/item/storage/belt/rogue/leather
 			neck = /obj/item/clothing/neck/roguetown/leather //minimal defense
-			beltr = /obj/item/scabbard/rumahench
 			beltl = /obj/item/rogueweapon/sword/sabre/mulyeog/rumahench
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/eastshirt2
 			cloak = /obj/item/clothing/cloak/eastcloak1

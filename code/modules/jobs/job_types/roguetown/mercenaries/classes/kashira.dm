@@ -13,7 +13,6 @@
 	..()
 	belt = /obj/item/storage/belt/rogue/leather
 	beltr = /obj/item/rogueweapon/sword/sabre/mulyeog/rumacaptain
-	beltl = /obj/item/scabbard/rumacaptain
 	backr = /obj/item/storage/backpack/rogue/satchel
 	backpack_contents = list(/obj/item/roguekey/mercenary, /obj/item/flashlight/flare/torch, /obj/item/flashlight/flare/torch/lantern)
 	H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
@@ -26,7 +25,7 @@
 	H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 	H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-	H.change_stat("strength", 2) 
+	H.change_stat("strength", 2)
 	H.change_stat("endurance", 3)
 	H.change_stat("constitution", 3)
 	H.change_stat("perception", 1)
@@ -48,7 +47,7 @@
 		shirt = /obj/item/clothing/suit/roguetown/armor/skin_armor/easttats
 		shoes = /obj/item/clothing/shoes/roguetown/armor/rumaclan
 
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)	
+	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_CRITICAL_RESISTANCE, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_NOPAINSTUN, TRAIT_GENERIC) //i swear this isn't as good as it sounds
 	H.grant_language(/datum/language/kazengunese)
