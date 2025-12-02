@@ -22,7 +22,6 @@
 			to_chat(H, span_warning("You are a foreign swordsman, carrying nothing but your sword and your skill."))
 			head = /obj/item/clothing/head/roguetown/mentorhat
 			gloves = /obj/item/clothing/gloves/roguetown/eastgloves1
-			pants = /obj/item/clothing/under/roguetown/trou/eastpants1
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/eastshirt1
 			armor = /obj/item/clothing/suit/roguetown/armor/basiceast
 			shoes = /obj/item/clothing/shoes/roguetown/boots
@@ -50,7 +49,6 @@
 			to_chat(H, span_warning("You are an ex-guardian, whenever that be for a petty noble, or a small shrine. You excel in defense with quarterstaffs."))
 			head = /obj/item/clothing/head/roguetown/mentorhat
 			gloves = /obj/item/clothing/gloves/roguetown/eastgloves1
-			pants = /obj/item/clothing/under/roguetown/trou/eastpants1
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/eastshirt2
 			armor = /obj/item/clothing/suit/roguetown/armor/basiceast/mentorsuit
 			shoes = /obj/item/clothing/shoes/roguetown/boots

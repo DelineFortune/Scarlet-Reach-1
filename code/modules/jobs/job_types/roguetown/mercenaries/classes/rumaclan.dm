@@ -27,7 +27,6 @@
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/eastshirt2
 			cloak = /obj/item/clothing/cloak/eastcloak1
 			armor = /obj/item/clothing/suit/roguetown/armor/skin_armor/easttats
-			pants = /obj/item/clothing/under/roguetown/trou/eastpants2
 			shoes = /obj/item/clothing/shoes/roguetown/armor/rumaclan
 			gloves = /obj/item/clothing/gloves/roguetown/eastgloves2
 			backr = /obj/item/storage/backpack/rogue/satchel
@@ -58,7 +57,6 @@
 			beltl = /obj/item/flashlight/flare/torch/lantern
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/eastshirt1
 			armor = /obj/item/clothing/suit/roguetown/armor/skin_armor/easttats
-			pants = /obj/item/clothing/under/roguetown/trou/eastpants2
 			shoes = /obj/item/clothing/shoes/roguetown/boots/leather/reinforced
 			gloves = /obj/item/clothing/gloves/roguetown/eastgloves2
 			backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve

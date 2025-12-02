@@ -35,7 +35,6 @@
 	if(should_wear_masc_clothes(H))
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/eastshirt1
 		cloak = /obj/item/clothing/cloak/eastcloak1
-		pants = /obj/item/clothing/under/roguetown/trou/eastpants1
 		gloves = /obj/item/clothing/gloves/roguetown/eastgloves2
 		armor = /obj/item/clothing/suit/roguetown/armor/skin_armor/easttats
 		shoes = /obj/item/clothing/shoes/roguetown/boots

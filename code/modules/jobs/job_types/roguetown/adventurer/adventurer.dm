@@ -72,8 +72,6 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 		/datum/advclass/trader/brewer,
 		/datum/advclass/trader/cuisiner,
 		/datum/advclass/foreigner,
-		/datum/advclass/foreigner/custodian,
-		/datum/advclass/foreigner/yoruku,
 	)
 
 /mob/living/carbon/human/proc/adv_hugboxing_start()
