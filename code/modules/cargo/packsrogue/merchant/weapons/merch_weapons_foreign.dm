@@ -50,16 +50,6 @@
 	cost = 80
 	contains = list(/obj/item/rogueweapon/spear/naginata)
 
-/datum/supply_pack/rogue/merc_weapons/katana
-	name = "Kazengun Straight Sword"
-	cost = 80
-	contains = list(/obj/item/rogueweapon/sword/sabre/mulyeog,
-					/obj/item/rogueweapon/scabbard/sword/kazengun)
-
-/datum/supply_pack/rogue/merc_weapons/miaodao
-	name = "Miaodao"
-	cost = 120
-	contains = list(/obj/item/rogueweapon/greatsword/miaodao)
 
 /datum/supply_pack/rogue/merc_weapons/tossbladekazengun
 	name = "Tossblade Belt, Eastern"
